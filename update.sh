@@ -1,0 +1,79 @@
+#!/bin/bash
+function copydata(){
+  cp normalize.css/normalize.css ./less
+  cp elements/elements.less ./less
+  cp html5-test-page/test.html .
+  sed -i '/<head>/r less.txt' test.html
+  sed -i 's/class="page"/class="content"/' test.html
+  sed -i '/<body>/r colors.txt' test.html
+  echo "Adding less script and stylesheet to the test page"
+}
+
+function update(){
+  if [ -d "normalize.css" ]
+  then
+    cd normalize.css
+    git pull
+    cd ..
+  else
+    git clone https://github.com/necolas/normalize.css.git
+  fi
+
+  if [ -d "elements" ]
+  then
+    cd elements 
+    git pull
+    cd ..
+  else
+    git clone https://github.com/dmitryf/elements.git
+  fi
+  if [ -d "html5-test-page" ]
+  then
+    cd html5-test-page 
+    git pull
+    cd ..
+  else
+    git clone https://github.com/cbracco/html5-test-page.git
+  fi
+  echo 'copying the useful files to the main directory'
+  copydata
+}
+
+
+function makecss(){
+  echo "make less files into css"
+  lessc --clean-css less/styles.less css/styles.css
+  lessc --clean-css less/normalize.less css/normalize.css
+
+  cp test.html test_css.html
+  sed -i 's/stylesheet\/less/stylesheet/' test_css.html
+  sed -i 's/less\//css\//' test_css.html
+  sed -i 's/\.less/\.css/' test_css.html
+
+}
+while :; do
+    case $1 in
+        -h|--help)   # Call a "show_help" function to display a synopsis, then exit.
+            echo "-h : display this help, -n|--nogit : don't update git repo, -c : make less into css" 
+            exit
+            ;;
+        -n|--nogit)   # Call a "show_help" function to display a synopsis, then exit.
+            echo "Skipping update for some reasons"
+            exit
+            ;;
+        -c|--makecss)   # Call a "show_help" function to display a synopsis, then exit.
+            makecss
+            exit
+            ;;
+        -d|--copydata)   # Call a "show_help" function to display a synopsis, then exit.
+            copydata
+            exit
+            ;;
+        *)               # Default case: If no more options then break out of the loop.
+            update
+            exit
+            ;;
+    esac
+
+    shift
+done

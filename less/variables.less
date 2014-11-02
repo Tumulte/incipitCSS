@@ -1,0 +1,75 @@
+/*#1 : LESS GLOBAL VARIABLES*/
+/*@main_color: #C63B33;*/
+/*FONTS*/
+@font_main_size: 1.25em; /* 20px in most browsers - optimum size IMO*/
+/*PROPORTIONS*/
+@ratio_main: 1.6em; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
+@ratio_half: @ratio_main / 2; 
+@ratio_double: @ratio_main * 2; 
+@ratio_triple: @ratio_main * 2; 
+/*COLORS*/
+/* Single tone (light variation) */
+@color_neg: spin(desaturate(lighten(@color_main, 50%), 10%), 20%);
+@color_warning: #fe0a07;
+@color_ok: #01ea07;
+
+.color_scheme(@type @color){
+  @color_main: @color;
+  @color_light_1: lighten(@color_main, 26%);
+  @color_light_2: lighten(@color_main, 15%);
+  @color_light_3: darken(@color_main, 8,2%);
+  @color_light_4: darken(@color_main, 26%);
+  @color_light_5: darken(@color_main, 32,81%);
+  @color_light_6: darken(@color_main, 52,81%);
+  /* Single tone (Saturation variation) */
+  @color_sat_1: desaturate(@color_main, 15%);
+  @color_sat_2: lighten(@color_sat_1, 20%);
+  @color_sat_4: darken(@color_sat_1, 20%);
+  @color_sat_3: desaturate(@color_main, 40%);
+  @color_sat_5: lighten(@color_sat_3, 20%);
+  @color_sat_6: darken(@color_sat_3, 20%);
+  /*Oposite */
+  @color_op_1: spin(@color_main, 170%);
+  @color_op_2: lighten(@color_main, 20%);
+  @color_op_3: darken(@color_main, 20%);
+  @color_op_4: lighten(@color_op_1, 20%);
+  @color_op_5: darken(@color_op_1, 20%);
+  @color_op_6: spin(@color_main, 150%);
+
+  /* Complementary */
+  @color_comp_1: spin(@color_main, 18%);
+  @color_comp_2: darken(@color_comp_1, 10%);
+  @color_comp_3: lighten(@color_comp_1, 15%);
+  @color_comp_4: spin(@color_main, -18%);
+  @color_comp_5: darken(@color_comp_4, 10%);
+  @color_comp_6: lighten(@color_comp_4, 15%);
+
+ @color1: 'color_@{type}_1';
+ @color2: 'color_@{type}_2';
+ @color3: 'color_@{type}_3';
+ @color4: 'color_@{type}_4';
+ @color5: 'color_@{type}_5';
+ @color6: 'color_@{type}_6';
+} 
+
+
+
+/*The gray equivalent of the main color (saturation 0%*/
+@color_grey: desaturate(@color_main, 100%);
+
+/*Text colors*/
+@grey_main:#333;
+@grey_light:#999;
+@grey_lighter:#d0d0d0;
+@grey_lightest:#eaeaea;
+@grey_dark:#111;
+
+.textlight(){
+  font-family: dvl,"dejavu light",  veranda, sans-serif;
+}
+.textnormal(){
+  font-family: dvc,"dejavu sans",  veranda, sans-serif;
+}
+/*mixin to showcase color schemes */
+
+

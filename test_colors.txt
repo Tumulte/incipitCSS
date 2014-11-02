@@ -1,0 +1,41 @@
+<div class="color_test color_main">
+</div>
+<div class="color_test color_l">
+</div>
+<div class="color_test color_ler">
+</div>
+<div class="color_test color_d">
+</div>
+<div class="color_test color_der">
+</div>
+<div class="color_test color_main">
+  <div class="color_test_inner color_neg">
+  </div>
+</div>
+<br/>
+<div class="color_test color_main">
+</div>
+<div class="color_test color_desat">
+</div>
+<div class="color_test color_desat_l">
+</div>
+<div class="color_test color_desat_ler">
+</div>
+<div class="color_test color_desat_d">
+</div>
+<div class="color_test color_grey">
+</div>
+<div class="color_test color_comp">
+</div>
+<div class="color_test color_comp_d">
+</div>
+<div class="color_test color_ana1">
+</div>
+<div class="color_test color_ana2">
+</div>
+<div class="color_test color_comp_desat">
+</div>
+<div class="color_test color_comp_grey">
+</div>
+<div class="color_test color_comp_grey_l">
+</div>

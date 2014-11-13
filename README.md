@@ -19,7 +19,7 @@ user the sensation your page is balanced and clean... In one word architectured.
 This stylesheet makes sure that every element uses this unit for its margin, padding.... Your page will be automatically 
 structured around a 32x32 grid.
 
-[Demo Page](https://cdn.rawgit.com/Tumulte/CooUse/master/test_css.html)
+[Demo Page](http://tumulte.me/css/test.html)
 
 [Demo Responsive](https://cdn.rawgit.com/Tumulte/CooUse/master/test_twocols_css.html)
 
@@ -33,7 +33,7 @@ Available options :
 * light variations
 *  saturation variations
 *  opposite colors
-*  analogous colors)
+*  analogous colors
 
 ##Clean forms
 
@@ -74,10 +74,9 @@ are for you
 
 #TODO
 
-* Responsive design
+* order the main stylesheet
 * Accessibility checkup
-* Cross-browser extensive accessibility checkup
-* Adapt generated colours to the main color brigthness
+* Cross-browser extensive checkup
 * Other OS updating scripts
 
 

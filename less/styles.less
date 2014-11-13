@@ -1,39 +1,21 @@
 @import "normalize.less";
-@import "elements.less";
+@import "lesshat.less";
 @import "variables.less";
-/*
-(use the keyword "###1" to jump to the next part "###2" for the next sub-part, "###3" for the sub-sub..)
-SUMMARY : 
-
-NAKED TAGS
-FORMS
-GENERIC CLASSES
-GENERIC STYLES
-  GRAPHICAL ELEMENTS
-  LOGO
-  MENUS
-    GLOBAL MENU
-    MAIN NAV
-  SITE TITLE
-  HOME
-  COLUMNS
-
-*/
 /*main color scheme*/
 /*colors tests... You can remove it*/
 .color_test{
-  width: 200px;
-  height: 200px;
+  width: 192px;
+  height: 192px;
   display: table-cell;
   vertical-align: middle;
 }
 .color_test_inner{
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   margin: auto auto;
 }
 @color_main: #0FAED2;
-@color_type: 'op';
+@color_type: 'ana';
 .color_scheme(@color_type, @color_main);
 .color1{
   background: @@color1;
@@ -87,10 +69,7 @@ body{
   font-family:  dvc, "dejavu",veranda, sans-serif;
   line-height: @ratio_main;
 }
-p{
-  margin-top: @ratio_main;
-  margin-bottom: @ratio_main
-}
+/* Links */
 a, a:visited{
   text-decoration: none;
   color: @@color1;
@@ -98,9 +77,23 @@ a, a:visited{
 a:hover{
   text-decoration: underline;
 }
-em, i{
+/* Text */ 
+small{
+  font-size: 0.8em;
+  line-height: @ratio_main*0.8;
+}
+p{
+  margin-top: @ratio_main;
+  margin-bottom: @ratio_main
+}
+em, 
+i{
   font-family: dvo;
 }
+pre{
+  margin: @ratio_main 0;
+}
+/* Headers  */
 h1,h2,h3,h4,h5,h6{
   .textlight();
   font-weight: 200;
@@ -108,14 +101,14 @@ h1,h2,h3,h4,h5,h6{
   color:@color_grey;
 }
 h1{
-  font-size: 2.61em;
-  line-height: 1.23em;
-  margin: 0.63em 0 0;
+  font-size: 2.6em;
+  line-height: 1.23077em;
+  margin: 0.61538em 0 0;
 }
 
 h2{
-  font-size: 1.8em;
   margin: 0.89em 0 0 0;
+  font-size: 1.8em;
   line-height: 1.78em;
 }
 h3{
@@ -133,27 +126,7 @@ h5, h6{
   margin: @ratio_main/0.8 0 0 0;
 }
 
-nav a, nav a:visited{ 
-  color: @grey_dark;
-}
-/*Reseting the list styles when they are a list of links in a navigation element*/
-nav ul{
-  padding:0;
-  margin:0;
-}
-form li,
-nav li{
-  padding:0;
-  margin:0;
-  list-style: none;
-}
-
-small{
-  font-size: 0.8em;
-  line-height: 2em;
-}
-
-/* Add js for cite */
+/* Quotations */
 q {
   font-family: Georgia,"Times New Roman",Times,serif;
   position: relative;
@@ -202,6 +175,7 @@ blockquote cite{
   text-align: right;
   margin: @ratio_main  @ratio_double 0 0;
 }
+/* Summary (needs js in ff to appear properly) */
 summary{
   color: @@color1;
   cursor: pointer;
@@ -213,7 +187,20 @@ summary:before{
 .open summary:before{
   content: '\2A3A \00A0';
 }
-/*dt styling is with generic classes*/
+hr{
+  margin: 1.4em 0 @ratio_main; /* basically the goal here is to make sure ...*/
+  height:@ratio_main/8;        /* ...the line fits in the grid even with the vertical margin merge */
+  border: none;
+  background: @grey_lighter;
+}
+hr:before{
+  border: solid 1px @grey_light;
+}
+/* Lists */
+ol,
+ul{
+  margin: @ratio_main;
+}
 dl{
   margin: @ratio_main 0;
 }
@@ -227,8 +214,33 @@ dd{
 dt{
   font-size: @ratio_half;
 }
+.bullet_less{ /*removes <li> decorations*/
+  margin: 0;
+  padding: 0;
+  list-style:none;
+}
+/* Navigation */
+
+nav a, 
+nav a:visited{ 
+  color: @grey_dark;
+}
+/*Reseting the list styles when they are a list of links in a navigation element*/
+nav ul{
+  padding:0;
+  margin:0;
+}
+form li,
+nav li{
+  padding:0;
+  margin:0;
+  list-style: none;
+}
+
+/* Tables */
 table{
   width: 100%;
+  overflow: auto;
 }
 th{
   text-align: left;
@@ -246,10 +258,18 @@ mark{
   color: #fff;
   padding: 0 @ratio_main;
 }
-
-/*###1 GENERIC CLASSES*/
-.pretty_font{
+img{
+  max-width: 100%;
+  vertical-align: bottom; /* removing the gap bellow the image*/
 }
+figure{
+  margin: 0;
+}
+figcaption{
+  font-family: .textlight;
+  font-size: @ratio_half;
+}
+
 .tooltip, abbr{
     display: inline;
     position: relative;
@@ -258,6 +278,7 @@ mark{
 abbr:hover:after{
     background: @@color1;
     bottom: @ratio_main;
+    left: 0;
     color: @color_neg;
     content: attr(title);
     padding:@ratio_half @ratio_main;
@@ -275,11 +296,6 @@ abbr:hover:before,
     position: absolute;
     z-index: 99;
 }
-.bullet_less{
-  margin: 0;
-  padding: 0;
-  list-style:none;
-}
 /*Hiding a semantic element useful for accessibility*/
 .out_of_the_way{
   position:absolute;
@@ -289,7 +305,7 @@ abbr:hover:before,
 .rightify{
   text-align: right;
 }
-.content{
+.container{
   padding: @ratio_double @ratio_main;
 }
 /* ###1 FORMS */
@@ -306,33 +322,27 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 27px;
-  font-size: 19.5px;
-  line-height: 36px;
-  color: #11133;
   border: 0;
   border-bottom: 1px solid @grey_lighter;
-}
-legend small {
-  font-size: 13.5px;
-  color: #999;
-}
-label{
-  font-family: altfont;
+  height: @ratio_main;
+  .box-sizing(border-box);
 }
 label,
 input,
+select,
 textarea {
-  font-weight: 200;
+  font-family: .textlight;
   display: block;
   text-align: center;
+  .box-sizing(border-box);
+}
+select,
+input{
+  height: 3.2em; /* this + border-box removes the 2px border offset*/
 }
 input[type="radio"] + label,
 input[type="checkbox"] + label{
   display: inline;
-}
-select{
-  padding: 4px 0 4px 8px;
 }
 progress{
   font-size: 1em;
@@ -342,6 +352,10 @@ progress{
 }
 input[type="file"]{
   line-height: 1.6em;
+}
+input[type="search"]{
+  -webkit-appearance:none;/* for some reason, chromium doesn't accept search's height */
+  .box-sizing(border-box);
 }
 textarea,
 select,
@@ -360,9 +374,8 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   display: block;
-  width: ~"calc(100% - 3.2em)";
+  width: ~"calc(100% - @{ratio_main})";
   padding: 0.95em 0.8em; 
-  margin: 1.6em; 
   color: @grey_light;
   background-color: #fff;
   border: 1px solid @grey_lighter;
@@ -381,39 +394,38 @@ input[type="color"] {
   -o-transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
   transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
 }
+select{
+  width: 100%;
+}
+
+select:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid,
+input:invalid,
+textarea:invalid,
+input:invalid{
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
+}
+select:valid:focus,
+textarea:valid:focus,
+input:valid:focus{
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
+}
 textarea:focus,
 select:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus {
+input:focus,
+textarea:empty:focus,
+select:empty:focus,
+input:empty:focus{
   border-color: #fff;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey_lighter;
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey_lighter;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey_lighter;
-}
-textarea:focus:invalid,
-input:required:focus:invalid{
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_warning;
-}
-textarea:required:valid,
-input:required:valid{
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color_ok;
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -433,8 +445,9 @@ input[type="color"]{
 }
 input[type="color"]{
   min-width:@ratio_double;
-  margin: @ratio_main auto;
   display: block;
+  height: @ratio_main;
+  margin:  @ratio_main auto;
 }
 input[type="range"]{
   margin: @ratio_main;
@@ -449,8 +462,7 @@ input[type="range"]{
 }
 
 textarea {
-  height: auto;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande"-serif;
+  height: @ratio_main*4;
 }
 /* Class for labelling required form items */
 .cptch_block input{
@@ -470,7 +482,7 @@ textarea {
   font-size: 1.2em;
   display: inline-block;
   width: 26px;
-  .rounded(30px);
+  .border-radius(30px);
   background: #aaa;
   color: #fff;
   text-align: center;
@@ -511,4 +523,84 @@ input[type="button"]:active,{/*buttonified exists to make a link looks like a bu
   position: relative;
   left: 4px;
   top: 4px;
+}
+audio {
+  height: @ratio_main;
+  display: block;
+}
+/* Colums */
+.make_table{
+  display: table;
+  width: 100%;
+}
+
+.make_cell{
+  display: table-cell;
+}
+.col_side{
+  width:37.5%;
+}
+.col_main{
+  width:62.5%;
+}
+
+
+
+
+@media only screen and (min-width : 1200px) {
+  .handheld{
+    display: none;
+  }
+}
+@media only screen and (max-width : 1200px) {
+  .col_main{
+    width: 100%;
+  }
+  #main_sidecol{
+    position: fixed;
+    .box-sizing(border-box);
+    top: 0;
+    left: 100%;
+    width: 100%;
+    .transition(1s ease left);
+  }
+  #hh_menu{
+    position: absolute;
+    top: 0;
+    padding-top: 0.89em;
+    left: -1.78em;
+    font-size: 1.8em;
+  }
+  #hh_close_menu{
+    display: block;
+    font-size: 1.8em;
+    line-height: 1.78em;
+  }
+
+  #main_sidecol:target{
+    left: 0;
+  }
+
+
+}
+
+@media only screen and (max-width : 979px) {
+
+}
+
+@media only screen and (max-width : 767px) {
+
+}
+
+@media only screen and (max-width : 480px) {
+
+}
+
+@media only screen and (max-width : 320px) {
+  body{
+    font-size: @font_main_size/1.5;
+  }
+  form{
+    padding: 0;
+  }
 }

@@ -1,10 +1,10 @@
 #!/bin/bash
 function copydata(){
   cp normalize.css/normalize.css ./less
-  cp elements/elements.less ./less
+  cp lesshat/build/lesshat.less ./less
   cp html5-test-page/test.html .
-  sed -i '/<head>/r less.txt' test.html
-  sed -i 's/class="page"/class="content"/' test.html
+  sed -i '/<head>/r head.txt' test.html
+  sed -i 's/class="page"/class="container"/' test.html
   sed -i '/<body>/r colors.txt' test.html
   echo "Adding less script and stylesheet to the test page"
 }
@@ -19,13 +19,13 @@ function update(){
     git clone https://github.com/necolas/normalize.css.git
   fi
 
-  if [ -d "elements" ]
+  if [ -d "lesshat" ]
   then
-    cd elements 
+    cd lesshat 
     git pull
     cd ..
   else
-    git clone https://github.com/dmitryf/elements.git
+    git clone https://github.com/madebysource/lesshat.git
   fi
   if [ -d "html5-test-page" ]
   then

@@ -10,11 +10,11 @@
     <meta charset="utf-8">
     <title>HTML5 Test Page</title>
 </head>
-<body style="background: url('images/grid.png')">
-<div class="container">
+<body>
+<div class="container" >
   <select id="color_type">
     <option value="op">Oposite colors</option>
-    <option value="comp">Complementary colors</option>
+    <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
   </select>
@@ -22,28 +22,37 @@
   <input id="color_main" type="color" />
   </p>
   <div class="color_test color_main">
+    <span class="color_title">@color_main</span>
   </div>
   <div class="color_test color1">
+    <span class="color_title">@color1</span>
   </div>
   <div class="color_test color2">
+    <span class="color_title">@color2</span>
   </div>
   <div class="color_test color3">
+    <span class="color_title">@color3</span>
   </div>
   <div class="color_test color4">
+    <span class="color_title">@color4</span>
   </div>
   <div class="color_test color5">
+    <span class="color_title">@color5 (@color3)</span>
     <div class="color_test_inner color3">
     </div>
   </div>
   <div class="color_test color6">
+    <span class="color_title">@color6 (@color1)</span>
     <div class="color_test_inner color1">
     </div>
   </div>
   <div class="color_test color1">
+    <span class="color_title">@color1 (@color_main)</span>
     <div class="color_test_inner color_main">
     </div>
   </div>
   <div class="color_test color5">
+    <span class="color_title">@color5 (@color_neg)</span>
     <div class="color_test_inner color_neg">
     </div>
   </div>

@@ -8,6 +8,7 @@
   height: 192px;
   display: table-cell;
   vertical-align: middle;
+  position: relative;
 }
 .color_test_inner{
   width: 96px;
@@ -15,7 +16,9 @@
   margin: auto auto;
 }
 @color_main: #0FAED2;
-@color_type: 'ana';
+@color_type: 'light';
+
+
 .color_scheme(@color_type, @color_main);
 .color1{
   background: @@color1;
@@ -40,6 +43,11 @@
 }
 .color_neg{
   background: @color_neg;
+}
+.color_title{
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -1.6em;
 }
 
 /*End of colors*/
@@ -336,10 +344,6 @@ textarea {
   text-align: center;
   .box-sizing(border-box);
 }
-select,
-input{
-  height: 3.2em; /* this + border-box removes the 2px border offset*/
-}
 input[type="radio"] + label,
 input[type="checkbox"] + label{
   display: inline;
@@ -356,6 +360,7 @@ input[type="file"]{
 input[type="search"]{
   -webkit-appearance:none;/* for some reason, chromium doesn't accept search's height */
   .box-sizing(border-box);
+  height: 3.2em; /* this + border-box removes the 2px border offset*/
 }
 textarea,
 select,
@@ -373,6 +378,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
+  height: 3.2em; /* this + border-box removes the 2px border offset*/
   display: block;
   width: ~"calc(100% - @{ratio_main})";
   padding: 0.95em 0.8em; 

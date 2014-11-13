@@ -9,40 +9,49 @@
 @ratio_triple: @ratio_main * 2; 
 /*COLORS*/
 /* Single tone (light variation) */
-@color_neg: spin(desaturate(lighten(@color_main, 50%), 10%), 20%);
 @color_warning: #fe0a07;
 @color_ok: #01ea07;
 
 .color_scheme(@type @color){
-  @color_main: @color;
-  @color_light_1: lighten(@color_main, 26%);
-  @color_light_2: lighten(@color_main, 15%);
-  @color_light_3: darken(@color_main, 8,2%);
-  @color_light_4: darken(@color_main, 26%);
-  @color_light_5: darken(@color_main, 32,81%);
-  @color_light_6: darken(@color_main, 52,81%);
-  /* Single tone (Saturation variation) */
-  @color_sat_1: desaturate(@color_main, 15%);
-  @color_sat_2: lighten(@color_sat_1, 20%);
-  @color_sat_4: darken(@color_sat_1, 20%);
-  @color_sat_3: desaturate(@color_main, 40%);
-  @color_sat_5: lighten(@color_sat_3, 20%);
-  @color_sat_6: darken(@color_sat_3, 20%);
-  /*Oposite */
-  @color_op_1: spin(@color_main, 170%);
-  @color_op_2: lighten(@color_main, 20%);
-  @color_op_3: darken(@color_main, 20%);
-  @color_op_4: lighten(@color_op_1, 20%);
-  @color_op_5: darken(@color_op_1, 20%);
-  @color_op_6: spin(@color_main, 150%);
+ @color_main: @color;
+ @color_neg: spin(desaturate(lighten(@color, 50%), 10%), 20%);
+ @light: lightness(@color);
+ @hue: hue(@color);
+ @sat: saturation(@color);
 
-  /* Complementary */
-  @color_ana_1: spin(@color_main, 18%);
-  @color_ana_2: darken(@color_ana_1, 10%);
-  @color_ana_3: lighten(@color_ana_1, 15%);
-  @color_ana_4: spin(@color_main, -18%);
-  @color_ana_5: darken(@color_ana_4, 10%);
-  @color_ana_6: lighten(@color_ana_4, 15%);
+ @color_light_1: hsl(@hue, @sat, 20%);
+ @color_light_2: hsl(@hue, @sat, 35%);
+ @color_light_3: hsl(@hue, @sat, 40%);
+ @color_light_4: hsl(@hue, @sat, 50%);
+ @color_light_5: hsl(@hue, @sat, 60%);
+ @color_light_6: hsl(@hue, @sat, 72%);
+
+ /* Single tone (Saturation variation) */
+ @color_sat_1: hsl(@hue, 60%, @light);
+ @color_sat_2: hsl(@hue, 50%, @light);
+ @color_sat_4: hsl(@hue, 30%, @light);
+ @color_sat_3: hsl(@hue, 40%, @light);
+ @color_sat_5: hsl(@hue, 20%, @light);
+ @color_sat_6: hsl(@hue, 10%, @light);
+ /*Oposite */
+ @color_op_1: hsl(@hue, @sat, 25%);
+ @color_op_2: spin(@color, 170%);
+ @hue_op: hue(@color_op_2);
+ @color_op_3: hsl(@hue_op, @sat, 65%);
+ @color_op_4: spin(@color, 150%);
+ @hue_op_2: hue(@color_op_4);
+ @color_op_5: hsl(@hue_op_2, @sat, 25%);
+ @color_op_6: hsl(@hue_op_2, @sat, 55%);
+
+ /* Analogous */
+ @color_ana_1: spin(@color, 18%);
+ @hue_ana_1: hue(@color_ana_1);
+ @color_ana_2: hsl(@hue_ana_1, @sat, 25%);
+ @color_ana_3: hsl(@hue_ana_1, @sat, 55%);
+ @color_ana_4: spin(@color, -18%);
+ @hue_ana_2: hue(@color_ana_4);
+ @color_ana_5: hsl(@hue_ana_2, @sat, 25%);
+ @color_ana_6: hsl(@hue_ana_2, @sat, 55%);
 
  @color1: 'color_@{type}_1';
  @color2: 'color_@{type}_2';
@@ -50,12 +59,26 @@
  @color4: 'color_@{type}_4';
  @color5: 'color_@{type}_5';
  @color6: 'color_@{type}_6';
+ @color_grey: desaturate(@color, 100%);
 } 
 
+.debug(@var) {
+  &:after {
+    content: "@{var}";
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
 
-
-/*The gray equivalent of the main color (saturation 0%*/
-@color_grey: desaturate(@color_main, 100%);
+/*The grey equivalent of the main color (saturation 0%*/
 
 /*Text colors*/
 @grey_main:#333;

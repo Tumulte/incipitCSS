@@ -21,7 +21,7 @@ structured around a 32x32 grid.
 
 [Demo Page](https://cdn.rawgit.com/Tumulte/CooUse/master/test_css.html)i
 
-[[[Demo]] Responsive](https://cdn.rawgit.com/Tumulte/CooUse/master/test_twocols_css.html)
+[Demo Responsive](https://cdn.rawgit.com/Tumulte/CooUse/master/test_twocols_css.html)
 
 ## Color scheme generator
 

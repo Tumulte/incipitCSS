@@ -49,6 +49,10 @@ function makecss(){
   sed -i 's/stylesheet\/less/stylesheet/' test_css.html
   sed -i 's/less\//css\//' test_css.html
   sed -i 's/\.less/\.css/' test_css.html
+  cp test_twocols.html test_twocols_css.html
+  sed -i 's/stylesheet\/less/stylesheet/' test_twocols_css.html
+  sed -i 's/less\//css\//' test_twocols_css.html
+  sed -i 's/\.less/\.css/' test_twocols_css.html
 
 }
 while :; do

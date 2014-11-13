@@ -19,8 +19,9 @@ user the sensation your page is balanced and clean... In one word architectured.
 This stylesheet makes sure that every element uses this unit for its margin, padding.... Your page will be automatically 
 structured around a 32x32 grid.
 
-[Demo Page](https://cdn.rawgit.com/Tumulte/CooUse/master/test_css.html)
-[Demo Responsive](https://cdn.rawgit.com/Tumulte/CooUse/master/test_twocols_css.html)
+[Demo Page](https://cdn.rawgit.com/Tumulte/CooUse/master/test_css.html)i
+
+[[[Demo]] Responsive](https://cdn.rawgit.com/Tumulte/CooUse/master/test_twocols_css.html)
 
 ## Color scheme generator
 

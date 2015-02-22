@@ -3,9 +3,9 @@ $(function(){
   type_picked = false;
   $('#color_main').change(function(){
     if(!type_picked){
-      less.modifyVars({'@color_main' : $(this).val()})
+      less.modifyVars({'@dominant' : $(this).val()})
     }else{
-      less.modifyVars({'@color_main' : $(this).val(), '@color_type' : type_picked})
+      less.modifyVars({'@dominant' : $(this).val(), '@color_type' : type_picked})
     }
     color_picked = $(this).val();
   });
@@ -16,6 +16,12 @@ $(function(){
       less.modifyVars({'@color_type' : $(this).val(), '@color_main' : color_picked})
     }
     type_picked = $(this).val();
+  });
+  $('#font_size').change(function(){
+      less.modifyVars({'@font_main_size' : $(this).val()+"em"})
+  });
+  $('#base_unit').change(function(){
+      less.modifyVars({'@ratio' : $(this).val()+"em"})
   });
   $('q').hover(function(){
     current_content= $(this).html();

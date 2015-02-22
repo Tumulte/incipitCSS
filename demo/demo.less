@@ -1,0 +1,58 @@
+@import '../less/styles.less';
+
+
+.subdom{
+  background: @@subdom;
+}
+.bg{
+  background: @@bg;
+}
+.subdom2{
+  background: @@subdom2;
+}
+.tonic{
+  background: @@tonic;
+}
+.tonic2{
+  background: @@tonic2;
+}
+.tonic3{
+  background: @@tonic3;
+}
+.color_main{
+  background: @dominant;
+}
+.color_neg{
+  background: @color_neg;
+}
+.color_title{
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -1.6em;
+}
+#demo_blog{
+  nav ul{
+    display: table;
+    width: 100%;
+  }
+  nav li{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: @ratio*2;
+  }
+  nav a{
+    border-bottom: @ratio/2 @@tonic2 solid;
+    display: block;
+  }
+  nav li:hover{
+    background: @@bg;
+  }
+  nav li:hover a{
+    color: @color_neg;
+    border-color: @@tonic;
+  }
+}
+
+
+

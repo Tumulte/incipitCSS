@@ -15,10 +15,38 @@
   height: 96px;
   margin: auto auto;
 }
-@color_type: 'op';
-@dominant: #0FAED2;
 
-.color_scheme(@color_type, @dominant);
+
+.color1{
+  background: @color_dominant;
+}
+.color2{
+  background: @color_subdominant1;
+}
+.color3{
+  background: @color_subdominant2;
+}
+.color4{
+  background: @color_tonic1;
+}
+.color5{
+  background: @color_tonic2;
+}
+.color6{
+  background: @color_background;
+}
+.color_main{
+  background: @color_dominant;
+}
+.color_neg{
+  background: @color_neg;
+}
+.color_title{
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -1.6em;
+}
+
 /*End of colors*/
 
 
@@ -49,7 +77,7 @@ body{
 /* Links */
 a, a:visited{
   text-decoration: none;
-  color: @@subdom;
+  color: @color_subdominant1;
 }
 a:hover{
   text-decoration: underline;
@@ -154,7 +182,7 @@ blockquote cite{
 }
 /* Summary (needs js in ff to appear properly) */
 summary{
-  color: @@subdom;
+  color: @color_dominant;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -231,7 +259,7 @@ tr:nth-child(even){
 }
 mark{
   font-weight: bold;
-  background: @dominant;
+  background: @color_dominant;
   color: #fff;
   padding: 0 @ratio;
 }
@@ -253,7 +281,7 @@ figcaption{
 }
 .tooltip:hover:after,
 abbr:hover:after{
-    background: @@subdom;
+    background: @color_dominant;
     bottom: @ratio;
     left: 0;
     color: @color_neg;
@@ -265,7 +293,7 @@ abbr:hover:after{
 abbr:hover:before,
 .tooltip:hover:before{
     border: solid;
-    border-color: @@subdom transparent;
+    border-color: @color_dominant transparent;
     border-width: 6px 7px 0 ;
     bottom: 26px;
     content: "";
@@ -282,11 +310,8 @@ abbr:hover:before,
 .rightify{
   text-align: right;
 }
-.container_side_only{
-  padding: 0 @ratio;
-}
 .container{
-  padding: @ratio*2 @ratio;
+  padding: @ratio @ratio*2;
 }
 /* ###1 FORMS */
 form {
@@ -350,6 +375,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
+  margin-bottom: @ratio;
   height: 3.2em; /* this + border-box removes the 2px border offset*/
   display: block;
   width: ~"calc(100% - @{ratio})";
@@ -490,7 +516,7 @@ input[type="reset"]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
   background: @color_neg;
-  color: @dominant;
+  color: @color_dominant;
 }
 button:active,
 .buttonified:active,
@@ -498,9 +524,6 @@ input[type="reset"]:active,
 input[type="submit"]:active,
 input[type="button"]:active,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
   .drop-shadow(0,0,0,0);
-  position: relative;
-  left: 4px;
-  top: 4px;
 }
 audio {
   height: @ratio;
@@ -516,17 +539,14 @@ audio {
   display: table-cell;
 }
 .col_side{
-  width:37.5%;
+  width: 16%;
 }
 .col_main{
-  width:62.5%;
+  width: 84%;
 }
 
 
 
-@media only screen and (min-width : 1300px) {
-  @main_font_size: 1em;
-}
 
 @media only screen and (min-width : 1200px) {
   .handheld{
@@ -534,16 +554,20 @@ audio {
   }
 }
 @media only screen and (max-width : 1200px) {
+  .no_handheld{
+    display: none;
+  }
   .col_main{
     width: 100%;
   }
-  #main_sidecol{
+  .col_side{
     position: fixed;
     .box-sizing(border-box);
     top: 0;
     left: 100%;
     width: 100%;
     .transition(1s ease left);
+    z-index: 10000;
   }
   #hh_menu{
     position: absolute;
@@ -556,10 +580,13 @@ audio {
     display: block;
     font-size: 1.8em;
     line-height: 1.78em;
+    z-index: 10000;
   }
 
-  #main_sidecol:target{
+  #main_sidecol:target, .main_sidecol_display /* for js manual activation*/{
     left: 0;
+    overflow: auto;
+    height: 100%;
   }
 
 

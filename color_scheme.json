@@ -1,0 +1,9 @@
+{
+    "oposite": {
+        "subdominant1": [0,0, -20],
+        "subdominant2": [0,0, 20],
+        "tonic1": [-170, 0, 0],
+        "tonic2": [-170, -20, 0],
+        "background": [0, -30, 0]
+    }
+}

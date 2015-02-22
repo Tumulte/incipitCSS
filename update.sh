@@ -45,14 +45,14 @@ function makecss(){
   lessc --clean-css less/styles.less css/styles.css
   lessc --clean-css less/normalize.less css/normalize.css
 
-  cp test.html test_css.html
-  sed -i 's/stylesheet\/less/stylesheet/' test_css.html
-  sed -i 's/less\//css\//' test_css.html
-  sed -i 's/\.less/\.css/' test_css.html
-  cp test_twocols.html test_twocols_css.html
-  sed -i 's/stylesheet\/less/stylesheet/' test_twocols_css.html
-  sed -i 's/less\//css\//' test_twocols_css.html
-  sed -i 's/\.less/\.css/' test_twocols_css.html
+  cp ./demo/all_tags.html ./demo/all_tags_css.html
+  sed -i 's/stylesheet\/less/stylesheet/' demo/all_tags_css.html
+  sed -i 's/less\//css\//' demo/all_tags_css.html
+  sed -i 's/\.less/\.css/' demo/all_tags_css.html
+  cp ./demo/responsive_twocols.html ./demo/responsive_twocols_css.html
+  sed -i 's/stylesheet\/less/stylesheet/' demo/responsive_twocols_css.html
+  sed -i 's/less\//css\//' demo/responsive_twocols_css.html
+  sed -i 's/\.less/\.css/' demo/responsive_twocols_css.html
 
 }
 while :; do

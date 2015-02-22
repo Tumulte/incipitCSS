@@ -1,59 +1,19 @@
-@import "normalize.less";
-@import "lesshat.less";
-@import "variables.less";
-/*main color scheme*/
-/*colors tests... You can remove it*/
-.color_test{
-  width: 192px;
-  height: 192px;
-  display: table-cell;
-  vertical-align: middle;
-  position: relative;
-}
-.color_test_inner{
-  width: 96px;
-  height: 96px;
-  margin: auto auto;
-}
-@color_type: 'op';
-@dominant: #0FAED2;
-
-.color_scheme(@color_type, @dominant);
-/*End of colors*/
-
-
-@font-face {
-  font-family: "dvl";
-  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "dvc";
-  src: url("../fonts/DejaVuSansCondensed.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "dvo";
-  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-/*###1 : NAKED TAGS*/
+/* Plain HTML TAGS */
 body{
   font-size: @font_main_size; 
   font-family:  dvc, "dejavu",veranda, sans-serif;
   line-height: @ratio;
 }
+
 /* Links */
 a, a:visited{
   text-decoration: none;
-  color: @@subdom;
+  color: @@color2;
 }
 a:hover{
   text-decoration: underline;
 }
+
 /* Text */ 
 small{
   font-size: 0.8em;
@@ -70,6 +30,7 @@ i{
 pre{
   margin: @ratio 0;
 }
+
 /* Headers  */
 h1,h2,h3,h4,h5,h6{
   .textlight();
@@ -154,7 +115,7 @@ blockquote cite{
 }
 /* Summary (needs js in ff to appear properly) */
 summary{
-  color: @@subdom;
+  color: @@color1;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -231,7 +192,7 @@ tr:nth-child(even){
 }
 mark{
   font-weight: bold;
-  background: @dominant;
+  background: @color_main;
   color: #fff;
   padding: 0 @ratio;
 }
@@ -253,7 +214,7 @@ figcaption{
 }
 .tooltip:hover:after,
 abbr:hover:after{
-    background: @@subdom;
+    background: @@color1;
     bottom: @ratio;
     left: 0;
     color: @color_neg;
@@ -265,7 +226,7 @@ abbr:hover:after{
 abbr:hover:before,
 .tooltip:hover:before{
     border: solid;
-    border-color: @@subdom transparent;
+    border-color: @@color1 transparent;
     border-width: 6px 7px 0 ;
     bottom: 26px;
     content: "";
@@ -282,11 +243,8 @@ abbr:hover:before,
 .rightify{
   text-align: right;
 }
-.container_side_only{
-  padding: 0 @ratio;
-}
 .container{
-  padding: @ratio*2 @ratio;
+  padding: @ratio @ratio*2;
 }
 /* ###1 FORMS */
 form {
@@ -490,7 +448,7 @@ input[type="reset"]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
   background: @color_neg;
-  color: @dominant;
+  color: @color_main;
 }
 button:active,
 .buttonified:active,
@@ -505,83 +463,4 @@ input[type="button"]:active,{/*buttonified exists to make a link looks like a bu
 audio {
   height: @ratio;
   display: block;
-}
-/* Colums */
-.make_table{
-  display: table;
-  width: 100%;
-}
-
-.make_cell{
-  display: table-cell;
-}
-.col_side{
-  width:37.5%;
-}
-.col_main{
-  width:62.5%;
-}
-
-
-
-@media only screen and (min-width : 1300px) {
-  @main_font_size: 1em;
-}
-
-@media only screen and (min-width : 1200px) {
-  .handheld{
-    display: none;
-  }
-}
-@media only screen and (max-width : 1200px) {
-  .col_main{
-    width: 100%;
-  }
-  #main_sidecol{
-    position: fixed;
-    .box-sizing(border-box);
-    top: 0;
-    left: 100%;
-    width: 100%;
-    .transition(1s ease left);
-  }
-  #hh_menu{
-    position: absolute;
-    top: 0;
-    padding-top: 0.89em;
-    left: -1.78em;
-    font-size: 1.8em;
-  }
-  #hh_close_menu{
-    display: block;
-    font-size: 1.8em;
-    line-height: 1.78em;
-  }
-
-  #main_sidecol:target{
-    left: 0;
-  }
-
-
-}
-
-@media only screen and (max-width : 979px) {
-
-}
-
-@media only screen and (max-width : 767px) {
-
-}
-
-@media only screen and (max-width : 480px) {
-
-}
-
-@media only screen and (max-width : 320px) {
-  body{
-    font-size: @font_main_size/1.5;
-  }
-  form{
-    padding: 0;
-  }
 }

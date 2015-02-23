@@ -1,5 +1,28 @@
 @import '../less/styles.less';
 
+@font-face{
+  font-family: 'unicode0';
+  src: url('../fonts/u1f000.ttf');
+}
+@font-face{
+  font-family: 'unicode4';
+  src: url('../fonts/u1f400.ttf');
+}
+
+/*main color scheme*/
+/*colors tests... You can remove it*/
+.color_test{
+  width: 192px;
+  height: 192px;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+.color_test_inner{
+  width: 96px;
+  height: 96px;
+  margin: auto auto;
+}
 .subdom{
   background: @@subdom;
 }
@@ -26,6 +49,11 @@
 }
 .color_neg{
   background: @color_neg;
+}
+.color_title{
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -1.6em;
 }
 .color_title{
   font-size: 0.8em;

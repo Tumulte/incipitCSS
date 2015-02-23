@@ -1,0 +1,55 @@
+<div class="container" >
+  <label>Font size (em)</label>
+  <input id="font_size" type="number" value="1.25" />
+  <label>Base unit (line height, margins....)(em)</label>
+  <input id="base_unit" type="number" value="1.6" />
+  <select id="color_type">
+    <option value="op">Oposite colors</option>
+    <option value="ana">Analogous colors</option>
+    <option value="light">Light variations</option>
+    <option value="sat">Saturation variations</option>
+  </select>
+  <p>
+  <input id="color_main" type="color" />
+  </p>
+  <div class="color_test color_main">
+    <span class="color_title">@color_main</span>
+  </div>
+  <div class="color_test subdom">
+    <span class="color_title">@subdom</span>
+  </div>
+  <div class="color_test subdom2">
+    <span class="color_title">@subdom2</span>
+  </div>
+  <div class="color_test bg">
+    <span class="color_title">@bg</span>
+  </div>
+  <div class="color_test bg_dark">
+    <span class="color_title">@bg_dark</span>
+  </div>
+  <div class="color_test tonic">
+    <span class="color_title">@tonic</span>
+  </div>
+  <div class="color_test tonic2">
+    <span class="color_title">@tonic2 (@subdom2)</span>
+    <div class="color_test_inner subdom2">
+    </div>
+  </div>
+  <div class="color_test tonic3">
+    <span class="color_title">@tonic3 (@subdom)</span>
+    <div class="color_test_inner subdom">
+    </div>
+  </div>
+  <div class="color_test subdom">
+    <span class="color_title">@subdom (@color_main)</span>
+    <div class="color_test_inner color_main">
+    </div>
+  </div>
+  <div class="color_test tonic2">
+    <span class="color_title">@tonic2 (@color_neg)</span>
+    <div class="color_test_inner color_neg">
+    </div>
+  </div>
+  <br/>
+    <button id="close_settings">Close</button>
+</div>

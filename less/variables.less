@@ -9,6 +9,32 @@
 @color_warning: #fe0a07;
 @color_ok: #01ea07;
 
+.variation(@current_value) when 
+    (@current_value >= 25%) or (@current_value <= 75%{
+  @more: 20%;
+  @less: -20%
+}
+.variation(@current_value) when (@current_value < 25%)
+    and (@current_value > 11%){
+  @more: 10%;
+  @less: -6%
+}
+.variation(@current_value) when (@current_value > 75%)
+    and (@current_value < 89%){
+  @more: 6%;
+  @less: -10%
+}
+.variation(@current_value) when (@current_value >= 89%){
+  @more: -10%;
+  @less: -20%
+}
+.variation(@current_value) when (@current_value <= 11%){
+  @more: 10%;
+  @less: 20%
+}
+
+
+
 .color_scheme(@type @dominant){
  @color_neg: spin(desaturate(lighten(@dominant, 50%), 10%), 20%);
  @light: lightness(@dominant);

@@ -1,11 +1,13 @@
 @import '../less/styles.less';
 
-
 .subdom{
   background: @@subdom;
 }
 .bg{
   background: @@bg;
+}
+.bg_dark{
+  background: @@bg_dark;
 }
 .subdom2{
   background: @@subdom2;
@@ -45,12 +47,11 @@
     border-bottom: @ratio/2 @@tonic2 solid;
     display: block;
   }
-  nav li:hover{
-    background: @@bg;
-  }
   nav li:hover a{
-    color: @color_neg;
-    border-color: @@tonic;
+    border-color: @dominant;
+  }
+  aside{
+      background: @@bg;
   }
 }
 

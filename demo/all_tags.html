@@ -11,16 +11,16 @@
 </head>
 <body>
 <div class="container" >
+  <label>Font size (em)</label>
+  <input id="font_size" type="number" value="1.25" />
+  <label>Base unit (line height, margins....)(em)</label>
+  <input id="base_unit" type="number" value="1.6" />
   <select id="color_type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
   </select>
-  <label>Font size (em)</label>
-  <input id="font_size" type="number" value="1.25" />
-  <label>Base unit (line height, margins....)(em)</label>
-  <input id="base_unit" type="number" value="1.6" />
   <p>
   <input id="color_main" type="color" />
   </p>
@@ -35,6 +35,9 @@
   </div>
   <div class="color_test bg">
     <span class="color_title">@bg</span>
+  </div>
+  <div class="color_test bg_dark">
+    <span class="color_title">@bg_dark</span>
   </div>
   <div class="color_test tonic">
     <span class="color_title">@tonic</span>

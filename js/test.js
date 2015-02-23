@@ -13,7 +13,7 @@ $(function(){
     if(!color_picked){
       less.modifyVars({'@color_type' : $(this).val()})
     }else{
-      less.modifyVars({'@color_type' : $(this).val(), '@color_main' : color_picked})
+      less.modifyVars({'@color_type' : $(this).val(), '@dominant' : color_picked})
     }
     type_picked = $(this).val();
   });

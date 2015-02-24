@@ -19,35 +19,12 @@ $(function(){
             $('#close_settings').click(function(){
                 $('#settings_container').html('');
             });
+            changeLessSetings();
         });
     });
 
     
 
-    color_picked = false;
-    type_picked = false;
-    $('#color_main').change(function(){
-      if(!type_picked){
-        less.modifyVars({'@dominant' : $(this).val()})
-      }else{
-        less.modifyVars({'@dominant' : $(this).val(), '@color_type' : type_picked})
-      }
-      color_picked = $(this).val();
-    });
-    $('#color_type').change(function(){
-      if(!color_picked){
-        less.modifyVars({'@color_type' : $(this).val()})
-      }else{
-        less.modifyVars({'@color_type' : $(this).val(), '@dominant' : color_picked})
-      }
-      type_picked = $(this).val();
-    });
-    $('#font_size').change(function(){
-        less.modifyVars({'@font_main_size' : $(this).val()+"em"})
-    });
-    $('#base_unit').change(function(){
-        less.modifyVars({'@ratio' : $(this).val()+"em"})
-    });
 //snippets
     $('q').hover(function(){
         current_content= $(this).html();
@@ -57,3 +34,25 @@ $(function(){
        $(this).html(current_content);
     });
 });
+function changeLessSetings()
+{
+    if (lessVariables === undefined) {
+        var lessVariables = [];
+    }
+    $('#color_main').change(function(){
+        lessVariables['@dominant'] = $(this).val();
+        less.modifyVars(lessVariables)
+    });
+    $('#color_type').change(function(){
+        lessVariables['@color_type'] = $(this).val();
+        less.modifyVars(lessVariables)
+    });
+    $('#font_size').change(function(){
+        lessVariables['@font_main_size'] = $(this).val()+"em";
+        less.modifyVars(lessVariables)
+    });
+    $('#base_unit').change(function(){
+        lessVariables['@ratio'] = $(this).val()+"em";
+        less.modifyVars(lessVariables)
+    });
+}

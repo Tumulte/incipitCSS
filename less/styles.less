@@ -44,7 +44,7 @@
 body{
   font-size: @font_main_size; 
   font-family:  dvc, "dejavu",veranda, sans-serif;
-  line-height: @ratio;
+  line-height: @base_unit;
 }
 /* Links */
 a, a:visited{
@@ -57,18 +57,18 @@ a:hover{
 /* Text */ 
 small{
   font-size: 0.8em;
-  line-height: @ratio*0.8;
+  line-height: @base_unit*0.8;
 }
 p{
-  margin-top: @ratio;
-  margin-bottom: @ratio
+  margin-top: @base_unit;
+  margin-bottom: @base_unit
 }
 em, 
 i{
   font-family: dvo;
 }
 pre{
-  margin: @ratio 0;
+  margin: @base_unit 0;
 }
 /* Headers  */
 h1,h2,h3,h4,h5,h6{
@@ -95,12 +95,12 @@ h3{
 }
 h4{
   font-size: 1em;
-  margin: @ratio 0 0 0;
+  margin: @base_unit 0 0 0;
   font-family: dvc,"dejavu sans",  veranda, sans-serif;
 }
 h5, h6{
   font-size: 0.8em;
-  margin: @ratio/0.8 0 0 0;
+  margin: @base_unit/0.8 0 0 0;
 }
 
 /* Quotations */
@@ -121,8 +121,8 @@ cite:before{
 
 blockquote {
   font-family: Georgia,"Times New Roman",Times,serif;
-  padding: 0 0 0 @ratio;
-  margin: 0 0 @ratio @ratio*2;
+  padding: 0 0 0 @base_unit;
+  margin: 0 0 @base_unit @base_unit*2;
   position: relative;
   font-style: italic;
 }
@@ -150,7 +150,7 @@ blockquote small {
 blockquote cite{
   display: block;
   text-align: right;
-  margin: @ratio  @ratio*2 0 0;
+  margin: @base_unit  @base_unit*2 0 0;
 }
 /* Summary (needs js in ff to appear properly) */
 summary{
@@ -165,8 +165,8 @@ summary:before{
   content: '\2A3A \00A0';
 }
 hr{
-  margin: 1.4em 0 @ratio; /* basically the goal here is to make sure ...*/
-  height:@ratio/8;        /* ...the line fits in the grid even with the vertical margin merge */
+  margin: 1.4em 0 @base_unit; /* basically the goal here is to make sure ...*/
+  height:@base_unit/8;        /* ...the line fits in the grid even with the vertical margin merge */
   border: none;
   background: @grey_lighter;
 }
@@ -176,20 +176,20 @@ hr:before{
 /* Lists */
 ol,
 ul{
-  margin: @ratio;
+  margin: @base_unit;
 }
 dl{
-  margin: @ratio 0;
+  margin: @base_unit 0;
 }
 dd{
   text-align: left;
   padding: 0;
   margin: 0;
-  font-size: @ratio/2;
+  font-size: @base_unit/2;
   color: #555;
 }
 dt{
-  font-size: @ratio/2;
+  font-size: @base_unit/2;
 }
 .bullet_less{ /*removes <li> decorations*/
   margin: 0;
@@ -221,10 +221,10 @@ table{
 }
 th{
   text-align: left;
-  padding: @ratio/2 @ratio;
+  padding: @base_unit/2 @base_unit;
 }
 td{
-  padding: @ratio/2 @ratio;
+  padding: @base_unit/2 @base_unit;
 }
 tr:nth-child(even){
   background: @grey_lightest;
@@ -233,7 +233,7 @@ mark{
   font-weight: bold;
   background: @dominant;
   color: #fff;
-  padding: 0 @ratio;
+  padding: 0 @base_unit;
 }
 img{
   max-width: 100%;
@@ -244,7 +244,7 @@ figure{
 }
 figcaption{
   font-family: .textlight;
-  font-size: @ratio/2;
+  font-size: @base_unit/2;
 }
 
 .tooltip, abbr{
@@ -254,11 +254,11 @@ figcaption{
 .tooltip:hover:after,
 abbr:hover:after{
     background: @@subdom;
-    bottom: @ratio;
+    bottom: @base_unit;
     left: 0;
     color: @color_neg;
     content: attr(title);
-    padding:@ratio/2 @ratio;
+    padding:@base_unit/2 @base_unit;
     position: absolute;
     z-index: 10000;
 }
@@ -283,10 +283,10 @@ abbr:hover:before,
   text-align: right;
 }
 .container_side_only{
-  padding: 0 @ratio;
+  padding: 0 @base_unit;
 }
 .container{
-  padding: @ratio*2 @ratio;
+  padding: @base_unit*2 @base_unit;
 }
 /* ###1 FORMS */
 form {
@@ -304,7 +304,7 @@ legend {
   padding: 0;
   border: 0;
   border-bottom: 1px solid @grey_lighter;
-  height: @ratio;
+  height: @base_unit;
   .box-sizing(border-box);
 }
 label,
@@ -352,7 +352,7 @@ input[type="tel"],
 input[type="color"] {
   height: 3.2em; /* this + border-box removes the 2px border offset*/
   display: block;
-  width: ~"calc(100% - @{ratio})";
+  width: ~"calc(100% - @{base_unit})";
   padding: 0.95em 0.8em; 
   color: @grey_light;
   background-color: #fff;
@@ -422,14 +422,14 @@ input[type="color"]{
   padding: 0;
 }
 input[type="color"]{
-  min-width:@ratio*2;
+  min-width:@base_unit*2;
   display: block;
-  height: @ratio;
-  margin:  @ratio auto;
+  height: @base_unit;
+  margin:  @base_unit auto;
 }
 input[type="range"]{
-  margin: @ratio;
-  width: ~"calc(100% - @{ratio})";
+  margin: @base_unit;
+  width: ~"calc(100% - @{base_unit})";
 }
 .screen_reader_text,/*Hidden for those who see but read by screen readers for those who don't*/
 .assistive_text {
@@ -440,7 +440,7 @@ input[type="range"]{
 }
 
 textarea {
-  height: @ratio*4;
+  height: @base_unit*4;
 }
 /* Class for labelling required form items */
 .cptch_block input{
@@ -477,7 +477,7 @@ input[type="button"],{/*buttonified exists to make a link looks like a button, w
   border: none;
   line-height: 1.6em;
   font-weight: bold;
-  padding:  @ratio/2 @ratio;
+  padding:  @base_unit/2 @base_unit;
   .drop-shadow(4px, 4px, 3px);
 }
 .buttonified{
@@ -500,7 +500,7 @@ input[type="button"]:active,{/*buttonified exists to make a link looks like a bu
   .drop-shadow(0,0,0,0);
 }
 audio {
-  height: @ratio;
+  height: @base_unit;
   display: block;
 }
 /* Colums */

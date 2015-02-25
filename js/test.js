@@ -12,9 +12,13 @@ $(function(){
         $('#settings_container').load('../utils/settings.html', function(){
             $('#settings_container').css({'position': 'fixed',
                                             'bottom': 0,
-                                            'left': 0,
+                                            'right': 0,
                                             'background': '#fff',
                                             'font-size': '0.8em',
+                                            'width': '320px',
+                                            'overflow': 'auto',
+                                            'border-left': '2px solid #555',
+                                            'border-top': '2px solid #555',
                                            });
             $('#close_settings').click(function(){
                 $('#settings_container').html('');
@@ -23,7 +27,6 @@ $(function(){
         });
     });
 
-    
 
 //snippets
     $('q').hover(function(){
@@ -36,23 +39,19 @@ $(function(){
 });
 function changeLessSetings()
 {
+    var possibleLessVariables = ['dominant', 'color_type', 'font_main_size', 'base_unit'];
     if (lessVariables === undefined) {
         var lessVariables = [];
     }
-    $('#color_main').change(function(){
-        lessVariables['@dominant'] = $(this).val();
-        less.modifyVars(lessVariables)
-    });
-    $('#color_type').change(function(){
-        lessVariables['@color_type'] = $(this).val();
-        less.modifyVars(lessVariables)
-    });
-    $('#font_size').change(function(){
-        lessVariables['@font_main_size'] = $(this).val()+"em";
-        less.modifyVars(lessVariables)
-    });
-    $('#base_unit').change(function(){
-        lessVariables['@ratio'] = $(this).val()+"em";
-        less.modifyVars(lessVariables)
-    });
+    for (index in possibleLessVariables) {
+        $('#'+possibleLessVariables[index]).change(function(){
+            value = $(this).val();
+            if (!isNaN(parseInt(value))){
+                value += 'em';
+            }
+            lessVariables[$(this).attr('id')] = value;
+            console.debug(lessVariables);
+            less.modifyVars(lessVariables)
+        });
+    }
 }

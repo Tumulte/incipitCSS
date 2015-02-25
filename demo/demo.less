@@ -12,15 +12,15 @@
 /*main color scheme*/
 /*colors tests... You can remove it*/
 .color_test{
-  width: 192px;
-  height: 192px;
+  width: 96px;
+  height: 96px;
   display: table-cell;
   vertical-align: middle;
   position: relative;
 }
 .color_test_inner{
-  width: 96px;
-  height: 96px;
+  width: 32px;
+  height: 32px;
   margin: auto auto;
 }
 .subdom{
@@ -55,11 +55,6 @@
   position: absolute;
   bottom: -1.6em;
 }
-.color_title{
-  font-size: 0.8em;
-  position: absolute;
-  bottom: -1.6em;
-}
 #demo_blog{
   nav ul{
     display: table;
@@ -69,10 +64,10 @@
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    height: @ratio*2;
+    height: @base_unit*2;
   }
   nav a{
-    border-bottom: @ratio/2 @@tonic2 solid;
+    border-bottom: @base_unit/2 @@tonic2 solid;
     display: block;
   }
   nav li:hover a{
@@ -81,6 +76,12 @@
   aside{
       background: @@bg;
   }
+}
+#settings_container{
+    width: 320px;
+    overflow: auto;
+    border-left: @base_unit/2 solid @dominant;
+    border-top: @base_unit/2 solid @dominant;
 }
 
 

@@ -5,9 +5,22 @@
 /*PROPORTIONS*/
 @base_unit: 1.6em; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
 /*COLORS*/
-/* Single tone (light variation) */
 @color_warning: #fe0a07;
 @color_ok: #01ea07;
+
+
+.contrast_check(@color1 @color2) {
+    @contrast: max(red(@color1), red(@color2))-min(red(@color1), red(@color2)) +
+    max(blue(@color1), blue(@color2))-min(blue(@color1), blue(@color2)) +
+    max(green(@color1), green(@color2))-min(green(@color1), green(@color2));
+    @lightness1: (red(@color1)*299+green(@color1)*299+blue(@color1)*299)/1000;
+    @lightness2: (red(@color2)*299+green(@color2)*299+blue(@color2)*299)/1000;
+    @contrast_lightness: max(@lightness1, @lightness2) - min(@lightness2, @lightness1);
+}
+.set_background(@color_main @color1 @color2) {
+
+}
+
 
 .variation_light(@current_value) when
     (@current_value >= 25%) and (@current_value <= 75%){
@@ -57,8 +70,18 @@
   @sat_more: 10%;
   @sat_less: 20%;
 }
-
-
+ .make_bg_light(@light) {
+     @bg_lightness : @light + 48%;
+ }
+ .make_bg_light(@light) when (@light - 48% >= 0){
+     @bg_sat : @light - 48%;
+ }
+ .make_bg_sat(@sat) {
+     @bg_sat : @sat + 37%;
+ }
+ .make_bg_sat(@sat) when (@sat - 37% > 0) {
+     @bg_sat : @sat - 37%;
+ }
 
 .color_scheme(@type @dominant){
  @color_neg: spin(desaturate(lighten(@dominant, 50%), 10%), 20%);
@@ -67,10 +90,11 @@
  .variation_light(@light);
  @sat: saturation(@dominant);
  .variation_sat(@sat);
+ .make_bg_light(@light);
+ .make_bg_sat(@sat);
 
  @light_subdom: hsl(@hue, @sat, 20%);
- @light_bg: hsl(@hue, @sat, 85%);
- @light_bg_dark: hsl(@hue, @sat, 05%);
+ @light_bg: hsl(@hue, @bg_sat, @bg_lightness);
  @light_subdom2: hsl(@hue, @sat, 40%);
  @light_tonic: hsl(@hue, @sat, 50%);
  @light_tonic2: hsl(@hue, @sat, 60%);
@@ -78,15 +102,13 @@
 
  /* Single tone (Saturation variation) */
  @sat_subdom: hsl(@hue, 60%, @light);
- @sat_bg: hsl(@hue, 20%, 5%-@light_more);
- @sat_bg_dark: hsl(@hue, 20%, 95%-@light_more);
+ @sat_bg: hsl(@hue, @bg_sat, @bg_lightness);
  @sat_tonic: hsl(@hue, 30%, @light);
  @sat_subdom2: hsl(@hue, 40%, @light);
  @sat_tonic2: hsl(@hue, 20%, @light);
  @sat_tonic3: hsl(@hue, 10%, @light);
  /*Oposite */
- @op_bg: hsl(@hue, @sat+@sat_less, 85%-@light_more);
- @op_bg_dark: hsl(@hue, @sat+@sat_less, 5%+@light_more);
+ @op_bg: spin(hsl(@hue, @bg_sat, @bg_lightness),170%);
  @op_tonic: spin(@dominant, 170%);
  @hue_op: hue(@op_bg);
  @op_subdom: hsl(@hue, @sat, @light+@light_more);
@@ -98,8 +120,7 @@
  /* Analogous */
  @ana_subdom: spin(@dominant, 18%);
  @hue_ana_subdom: hue(@ana_subdom);
- @ana_bg: hsl(@hue_ana_subdom, @sat+@sat_less, 90%-@light_more);
- @ana_bg_dark: hsl(@hue_ana_subdom, @sat+@sat_less, 5%+@light_more);
+ @ana_bg: hsl(@hue_ana_subdom, @bg_sat, @bg_lightness);
  @ana_subdom2: hsl(@hue_ana_subdom, @sat, 55%);
  @ana_tonic: spin(@dominant, -18%);
  @hue_ana_bg: hue(@ana_tonic);
@@ -109,11 +130,11 @@
  @subdom: '@{type}_subdom';
  @subdom2: '@{type}_subdom2';
  @bg: '@{type}_bg';
- @bg_dark: '@{type}_bg_dark';
  @tonic: '@{type}_tonic';
  @tonic2: '@{type}_tonic2';
  @tonic3: '@{type}_tonic3';
- @color_grey: desaturate(@dominant, 100%);
+ @grey_dom: desaturate(@dominant, 100%);
+ @grey_cont: desaturate(@@bg, 100%);
 }
 
 .debug(@var) {

@@ -24,24 +24,26 @@
   <div class="color_test bg">
     <span class="color_title">@bg</span>
   </div>
-  <div class="color_test bg_dark">
-    <span class="color_title">@bg_dark</span>
-  </div>
   <div class="color_test tonic">
     <span class="color_title">@tonic</span>
   </div>
+  <div class="color_test bg">
+    <span class="color_title">@color_main (@bg)</span>
+    <div class="color_test_inner color_main">
+    </div>
+  </div>
   <div class="color_test tonic2">
-    <span class="color_title">@tonic2 (@subdom2)</span>
+    <span class="color_title">@subdom2 (@tonic2)</span>
     <div class="color_test_inner subdom2">
     </div>
   </div>
   <div class="color_test tonic3">
-    <span class="color_title">@tonic3 (@subdom)</span>
+    <span class="color_title">@subdom (@tonic3)</span>
     <div class="color_test_inner subdom">
     </div>
   </div>
   <div class="color_test subdom">
-    <span class="color_title">@subdom (@color_main)</span>
+    <span class="color_title">@color_neg (@color_main)</span>
     <div class="color_test_inner color_main">
     </div>
   </div>

@@ -1,0 +1,6 @@
+{
+  "src_files": [
+    "settings.js",
+    "test/*.js"
+  ]
+}

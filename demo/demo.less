@@ -4,6 +4,7 @@
   font-family: 'unicode0';
   src: url('../fonts/u1f000.ttf');
 }
+
 @font-face{
   font-family: 'unicode4';
   src: url('../fonts/u1f400.ttf');
@@ -28,9 +29,6 @@
 }
 .bg{
   background: @@bg;
-}
-.bg_dark{
-  background: @@bg_dark;
 }
 .subdom2{
   background: @@subdom2;
@@ -67,7 +65,8 @@
     height: @base_unit*2;
   }
   nav a{
-    border-bottom: @base_unit/2 @@tonic2 solid;
+    background: @@bg;
+    color: @dominant;
     display: block;
   }
   nav li:hover a{
@@ -83,6 +82,7 @@
     border-left: @base_unit/2 solid @dominant;
     border-top: @base_unit/2 solid @dominant;
 }
+
 
 
 

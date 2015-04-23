@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>A sample HTML5 two-column layout</title>
+    <meta name="description" content="Don't forget to add a 1-2 sentence description here.">
+    <meta name="keywords" content="Don't forget to add 20-30 important keywords here.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="demo.less" rel="stylesheet/less" type="text/css">
+    <style type="text/css">
+        .colour{
+            float:left;
+            font-size:8px;
+            width:12px;
+        }
+    </style>
+    <script src="../js/lib/jquery.js" type="text/javascript"></script>
+    <script src="../js/settings.js" type="text/javascript"></script>
+    <script src="../js/Colour.js" type="text/javascript"></script>
+    <script  type="text/javascript">
+        function contrastLight(rgb){
+            return (rgb.r*299+rgb.g*299+rgb.b*299)/1000;
+        }
+        function contrastColour(colour1, colour2){
+            return Math.max(colour2.r, colour1.r) - Math.min(colour1.r, colour2.r) +
+                   Math.max(colour2.g, colour1.g) - Math.min(colour1.g, colour2.g) +
+                   Math.max(colour2.b, colour1.b) - Math.min(colour1.b, colour2.b)
+        }
+        function contrastDiff(colour1, colour2){
+           return Math.max(color1, color2) - Math.min(color2, color1);
+        }
+
+        $(function(){
+            var previous_contrast = 0;
+            var contrast_sum = 0;
+            var contrast_max = 0;
+            var contrast_min = 100;
+            for(i=1; i<=100; i++){
+                generated_c = new HSLColour(i*3.6, i, i)
+                colour = generated_c.getCSSIntegerRGB();
+                rgb = generated_c.getRGB();
+                current_contrast = contrastLight(rgb);
+                if(previous_contrast > 0) {
+                    contrast = contrastDiff(current_contrast, previous_contrast);
+                    contrast_sum +=contrast;
+                    if( contrast > contrast_max) {
+                        contrast_max = contrast;
+                    }
+                    if( contrast < contrast_min) {
+                        contrast_min = contrast;
+                    }
+                    console.log(current_contrast);
+                    $('body').append('<div class="colour" style="height:'+contrast*100+'px;background:'+colour+'">'+i+'</div>');
+                }
+                previous_contrast = current_contrast;
+            }
+
+
+            $('body').append('<p style="clear:both">Moyenne : '+contrast_sum/100+'</p>');
+            $('body').append('<p>Max : '+contrast_max+'</p>');
+            $('body').append('<p>Min : '+contrast_min+'</p>');
+        });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

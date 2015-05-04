@@ -25,9 +25,11 @@
             $('body').append('<input id="light" type="number" />');
             $('#hue').change(function(){
                 $('#colors').html('');
-            });
                 displayBars($(this).val());
                 displayBars($(this).val(), true);
+            });
+            contrastSatPerHue();
+            contrastSatPerHue(true);
         });
     </script>
 

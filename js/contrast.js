@@ -52,8 +52,7 @@ function displayBars(hue, colourContrast){
     var contrastBars = '';
     var previousRGB = false;
     for(i=1; i<=360; i++){
-        j = i/3.6;
-        generated_c = new HSLColour(360-i, 66, j)
+        generated_c = new HSLColour(300, i/3.6, 50)
         rgb = generated_c.getRGB();
         colour = generated_c.getCSSIntegerRGB();
         if(previousRGB){
@@ -71,7 +70,33 @@ function displayBars(hue, colourContrast){
     contrast_max = getHighestValue(contrast_array);
     contrast_min = getLowestValue(contrast_array);
     $('#colors').append(contrastBars);
-    $('#colors').append('<p style="clear:both">Moyenne : '+contrast_sum/100+'</p>');
+    $('#colors').append('<p style="clear:both">Moyenne : '+contrast_sum/360+'</p>');
+    $('#colors').append('<p>Max : '+contrast_max+'</p>');
+    $('#colors').append('<p>Min : '+contrast_min+'</p>');
+}
+function contrastSatPerHue(colourContrast) {
+    contrastBars = '';
+    for(i=1; i<=360; i++){
+        generated_c = new HSLColour(i, 100, 50)
+        generated_c_sat = new HSLColour(i, 99, 50)
+        rgb = generated_c.getRGB();
+        colour = generated_c.getCSSIntegerRGB();
+        colour_sat = generated_c_sat.getCSSIntegerRGB();
+        rgb = generated_c.getRGB();
+        rgb_sat = generated_c_sat.getRGB();
+        if(colourContrast){
+            contrast = contrastDiffColour(rgb, rgb_sat);
+        } else {
+            contrast = contrastDiff(rgb, rgb_sat);
+        }
+        contrastBars+= generateBars(contrast, colour );
+        contrast_array[i-2] = contrast;
+    }
+    contrast_sum = getSum(contrast_array);
+    contrast_max = getHighestValue(contrast_array);
+    contrast_min = getLowestValue(contrast_array);
+    $('#colors').append(contrastBars);
+    $('#colors').append('<p style="clear:both">Moyenne : '+contrast_sum/360+'</p>');
     $('#colors').append('<p>Max : '+contrast_max+'</p>');
     $('#colors').append('<p>Min : '+contrast_min+'</p>');
 }

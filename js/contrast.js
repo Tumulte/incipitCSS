@@ -43,7 +43,7 @@ function getSum(valueArray){
     var contrast_array = [];
     var contrast_colour_array = [];
 function generateBars(contrast, colour){
-   return '<div class="colour" style="height:'+contrast*55+'px;background:'+colour+'"></div>';
+   return '<div class="colour" style="height:'+contrast*100+'px;background:'+colour+'"></div>';
 }
 
 var colourContrast = false;
@@ -52,7 +52,7 @@ function displayBars(hue, colourContrast){
     var contrastBars = '';
     var previousRGB = false;
     for(i=1; i<=360; i++){
-        generated_c = new HSLColour(300, i/3.6, 50)
+        generated_c = new HSLColour(hue, 100, i/3.6)
         rgb = generated_c.getRGB();
         colour = generated_c.getCSSIntegerRGB();
         if(previousRGB){

@@ -30,4 +30,17 @@ describe("Contrast generator application", function() {
         var numbers = [101.00002, 101, 10, 5.552, 5.551, 11];
         expect(getSum(numbers)).toEqual(234.10302);
     });
+    it('returns a div with a height corresponding to the contrast and the color as BG', function(){
+        generated_c = new RGBColour(200, 100, 100);
+        generated_c2 = new RGBColour(200, 100, 99);
+        rgb = generated_c.getRGB();
+        rgb2 = generated_c2.getRGB();
+        contrast = contrastDiffColour(rgb, rgb2);
+        contrast_light = contrastDiff(rgb, rgb2);
+        div = generateBars(contrast, generated_c2.getCSSIntegerRGB());
+        div_light = generateBars(contrast_light, generated_c2.getCSSIntegerRGB());
+        expect(div).toEqual('<div class="colour" style="height:100px;background:rgb(200,100,99)"></div>');
+        expect(div_light).toEqual('<div class="colour" style="height:29.9px;background:rgb(200,100,99)"></div>');
+
+    });
 });

@@ -38,10 +38,10 @@ function getSum(valueArray){
 }
 
 
-    var previous_rgb = false;
-    var contrast_colour_bars = '';
-    var contrast_array = [];
-    var contrast_colour_array = [];
+var previous_rgb = false;
+var contrast_colour_bars = '';
+var contrast_array = [];
+var contrast_colour_array = [];
 function generateBars(contrast, colour){
    return '<div class="colour" style="height:'+contrast*100+'px;background:'+colour+'"></div>';
 }
@@ -92,11 +92,17 @@ function contrastSatPerHue(colourContrast) {
         contrastBars+= generateBars(contrast, colour );
         contrast_array[i-2] = contrast;
     }
+    $('#colors').append(contrastBars);
+    displayStats(contrast_array);
+}
+function displayStats(contrast_array){
+    $('#colors').append(generateStats(contrast_array));
+}
+function generateStats(contrast_array){
     contrast_sum = getSum(contrast_array);
     contrast_max = getHighestValue(contrast_array);
     contrast_min = getLowestValue(contrast_array);
-    $('#colors').append(contrastBars);
-    $('#colors').append('<p style="clear:both">Moyenne : '+contrast_sum/360+'</p>');
-    $('#colors').append('<p>Max : '+contrast_max+'</p>');
-    $('#colors').append('<p>Min : '+contrast_min+'</p>');
+    return '<p style="clear:both">Moyenne : '+Math.round(contrast_sum/360*100)/100+'</p>'+
+    '<p>Max : '+contrast_max+'</p>'+
+    '<p>Min : '+contrast_min+'</p>';
 }

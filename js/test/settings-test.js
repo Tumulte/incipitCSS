@@ -43,4 +43,9 @@ describe("Contrast generator application", function() {
         expect(div_light).toEqual('<div class="colour" style="height:29.9px;background:rgb(200,100,99)"></div>');
 
     });
+    it('returns an html with the highest, lowest and sum values of an array', function(){
+        array = [0.5,1,52,52.02,10,14,0.8];
+        expect(generateStats(array)).toEqual('<p style="clear:both">Moyenne : 0.36</p><p>Max : 52.02</p><p>Min : 0.5</p>');
+    });
+
 });

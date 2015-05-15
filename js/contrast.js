@@ -1,9 +1,12 @@
 function contrastLight(rgb){
-    return (rgb.r*299+rgb.g*299+rgb.b*299);
+    return (rgb.r*299+rgb.g*587+rgb.b*114);
 }
 function contrastDiff(colour1, colour2){
-   return (Math.max(contrastLight(colour1), contrastLight(colour2)) -
-          Math.min(contrastLight(colour2), contrastLight(colour1)))/1000;
+   brightness1 = contrastLight(colour1);
+   brightness2 = contrastLight(colour2);
+   console.log(brightness2 - brightness1);
+   return (Math.max(brightness2, brightness1) -
+          Math.min(brightness1, brightness2))/1000;
 }
 function contrastDiffColour(colour1, colour2){
     return Math.max(colour2.r, colour1.r) - Math.min(colour1.r, colour2.r) +
@@ -74,20 +77,20 @@ function displayBars(hue, colourContrast){
     $('#colors').append('<p>Max : '+contrast_max+'</p>');
     $('#colors').append('<p>Min : '+contrast_min+'</p>');
 }
-function contrastSatPerHue(colourContrast) {
+function contrastPerHue(colourContrast) {
     contrastBars = '';
     for(i=1; i<=360; i++){
         generated_c = new HSLColour(i, 100, 50)
-        generated_c_sat = new HSLColour(i, 99, 50)
+        generated_c2 = new HSLColour(i, 99, 50)
         rgb = generated_c.getRGB();
         colour = generated_c.getCSSIntegerRGB();
-        colour_sat = generated_c_sat.getCSSIntegerRGB();
+        colour2 = generated_c2.getCSSIntegerRGB();
         rgb = generated_c.getRGB();
-        rgb_sat = generated_c_sat.getRGB();
+        rgb2 = generated_c2.getRGB();
         if(colourContrast){
-            contrast = contrastDiffColour(rgb, rgb_sat);
+            contrast = contrastDiffColour(rgb, rgb2);
         } else {
-            contrast = contrastDiff(rgb, rgb_sat);
+            contrast = contrastDiff(rgb, rgb2);
         }
         contrastBars+= generateBars(contrast, colour );
         contrast_array[i-2] = contrast;
@@ -102,7 +105,7 @@ function generateStats(contrast_array){
     contrast_sum = getSum(contrast_array);
     contrast_max = getHighestValue(contrast_array);
     contrast_min = getLowestValue(contrast_array);
-    return '<p style="clear:both">Moyenne : '+Math.round(contrast_sum/360*100)/100+'</p>'+
-    '<p>Max : '+contrast_max+'</p>'+
-    '<p>Min : '+contrast_min+'</p>';
+    return '<p style="clear:both">Moyenne : '+(contrast_sum/360).toFixed(2)+'</p>'+
+    '<p>Max : '+contrast_max.toFixed(2)+'</p>'+
+    '<p>Min : '+contrast_min.toFixed(2)+'</p>';
 }

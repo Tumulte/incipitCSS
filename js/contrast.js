@@ -4,7 +4,6 @@ function contrastLight(rgb){
 function contrastDiff(colour1, colour2){
    brightness1 = contrastLight(colour1);
    brightness2 = contrastLight(colour2);
-   console.log(brightness2 - brightness1);
    return (Math.max(brightness2, brightness1) -
           Math.min(brightness1, brightness2))/1000;
 }
@@ -46,7 +45,7 @@ var contrast_colour_bars = '';
 var contrast_array = [];
 var contrast_colour_array = [];
 function generateBars(contrast, colour){
-   return '<div class="colour" style="height:'+contrast*100+'px;background:'+colour+'"></div>';
+   return '<div class="colour" style="height:'+(contrast*10).toFixed(2)+'px;background:'+colour+'"></div>';
 }
 
 var colourContrast = false;
@@ -77,21 +76,17 @@ function displayBars(hue, colourContrast){
     $('#colors').append('<p>Max : '+contrast_max+'</p>');
     $('#colors').append('<p>Min : '+contrast_min+'</p>');
 }
-function contrastPerHue(colourContrast) {
+function contrastPerHue(params) {
     contrastBars = '';
     for(i=1; i<=360; i++){
-        generated_c = new HSLColour(i, 100, 50)
-        generated_c2 = new HSLColour(i, 99, 50)
+        generated_c = new HSLColour(i, params['sat'], params['light'])
+        generated_c2 = new HSLColour(i, params['sat']+params['sat_diff'], params['light']+params['light_diff'])
         rgb = generated_c.getRGB();
         colour = generated_c.getCSSIntegerRGB();
         colour2 = generated_c2.getCSSIntegerRGB();
         rgb = generated_c.getRGB();
         rgb2 = generated_c2.getRGB();
-        if(colourContrast){
-            contrast = contrastDiffColour(rgb, rgb2);
-        } else {
-            contrast = contrastDiff(rgb, rgb2);
-        }
+        contrast = contrastDiffColour(rgb, rgb2);
         contrastBars+= generateBars(contrast, colour );
         contrast_array[i-2] = contrast;
     }

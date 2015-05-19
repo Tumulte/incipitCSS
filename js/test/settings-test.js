@@ -39,8 +39,8 @@ describe("Contrast generator application", function() {
         contrast_light = contrastDiff(rgb, rgb2);
         div = generateBars(contrast, generated_c2.getCSSIntegerRGB());
         div_light = generateBars(contrast_light, generated_c2.getCSSIntegerRGB());
-        expect(div).toEqual('<div class="colour" style="height:100px;background:rgb(200,100,99)"></div>');
-        expect(div_light).toEqual('<div class="colour" style="height:11.4px;background:rgb(200,100,99)"></div>');
+        expect(div).toEqual('<div class="colour" style="height:10.00px;background:rgb(200,100,99)"></div>');
+        expect(div_light).toEqual('<div class="colour" style="height:1.14px;background:rgb(200,100,99)"></div>');
 
     });
     it('returns an html with the highest, lowest and sum values of an array', function(){

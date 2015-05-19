@@ -20,20 +20,27 @@
     <script  type="text/javascript">
 
         $(function(){
-            $('body').append('<input id="hue" type="number" />');
-            $('body').append('<input id="sat" type="number" />');
-            $('body').append('<input id="light" type="number" />');
-            $('#hue').change(function(){
+            var color_params = {'sat':0, 'light':50, 'sat_diff':1, 'light_diff':0}
+            $('.color_parameters').change(function(){
                 $('#colors').html('');
-                displayBars($(this).val());
-                displayBars($(this).val(), true);
+                name = $(this).attr('name');
+                value = parseInt($(this).val());
+                color_params[name] = value;
+                contrastPerHue(color_params);
             });
-            contrastPerHue();
         });
     </script>
 
   </head>
   <body>
+  sat
+  <input class="color_parameters" name="sat" type="number" />
+  sat diff
+  <input class="color_parameters" name="sat_diff" type="number" />
+  light
+  <input class="color_parameters" name="light" type="number" />
+  light_diff
+  <input class="color_parameters" name="light_diff" type="number" />
   <div id="colors"></div>
   </body>
 </html>

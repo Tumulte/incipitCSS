@@ -20,7 +20,7 @@
     <script  type="text/javascript">
 
         $(function(){
-            var color_params = {'sat':0, 'light':50, 'sat_diff':1, 'light_diff':0}
+            var color_params = {'hue_diff':0, 'sat':100, 'light':50, 'sat_diff':0, 'light_diff':0}
             $('.color_parameters').change(function(){
                 $('#colors').html('');
                 name = $(this).attr('name');
@@ -33,14 +33,16 @@
 
   </head>
   <body>
+  hue diff
+  <input class="color_parameters" name="hue_diff" value="0" type="number" />
   sat
-  <input class="color_parameters" name="sat" type="number" />
+  <input class="color_parameters" name="sat" value="100" type="number" />
   sat diff
-  <input class="color_parameters" name="sat_diff" type="number" />
+  <input class="color_parameters" name="sat_diff" value="0" type="number" />
   light
-  <input class="color_parameters" name="light" type="number" />
+  <input class="color_parameters" name="light" value="50" type="number" />
   light_diff
-  <input class="color_parameters" name="light_diff" type="number" />
+  <input class="color_parameters" name="light_diff" value="0" type="number" />
   <div id="colors"></div>
   </body>
 </html>

@@ -1,0 +1,71 @@
+/* Font settings */
+/* Main font*/
+@font-face {
+  font-family: "font";
+  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "font_bold";
+  src: url("../fonts/DejaVuSansCondensed.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "font_italic";
+  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Alternative font */
+@font-face {
+  font-family: "alt_font";
+  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "alt_font_bold";
+  src: url("../fonts/DejaVuSansCondensed.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "alt_font_italic";
+  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+/* third font (but 2 is plenty in most cases) */
+@font-face {
+  font-family: "third_font";
+  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "third_font_bold";
+  src: url("../fonts/DejaVuSansCondensed.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "third_font_italic";
+  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Web safe fonts, choose the closest one to the font you're using */
+@sans_fail : helvetica, veranda, arial, sans;
+@serif_fail : times, georgia, serif;
+
+@font: font, @sans_fail;
+@font_italic: font_italic, @sans_fail;
+@font_bold: font_bold, @sans_fail;
+@alt_font: alt_font, @sans_fail;
+@alt_font_italic: alt_font_italic, @sans_fail;
+@alt_font_bold: alt_font_bold, @sans_fail;
+@third_font: third_font, @sans_fail;
+@third_font_italic: third_font_italic, @sans_fail;
+@third_font_bold: third_font_bold, @sans_fail;

@@ -1,6 +1,8 @@
 @import "normalize.less";
 @import "lesshat.less";
 @import "variables.less";
+@import "fonts.less";
+
 /*main color scheme*/
 /*colors tests... You can remove it*/
 .color_test{
@@ -22,28 +24,10 @@
 /*End of colors*/
 
 
-@font-face {
-  font-family: "dvl";
-  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "dvc";
-  src: url("../fonts/DejaVuSansCondensed.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "dvo";
-  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
 /*###1 : NAKED TAGS*/
 body{
   font-size: @font_main_size; 
-  font-family:  dvc, "dejavu",veranda, sans-serif;
+  font-family: @font;
   line-height: @base_unit;
 }
 /* Links */
@@ -65,14 +49,14 @@ p{
 }
 em, 
 i{
-  font-family: dvo;
+  font-family: @font_italic;
 }
 pre{
   margin: @base_unit 0;
 }
 /* Headers  */
 h1,h2,h3,h4,h5,h6{
-  .textlight();
+  font-family: @font;
   font-weight: 200;
   color:@grey_light;
   color:@color_grey;
@@ -96,7 +80,6 @@ h3{
 h4{
   font-size: 1em;
   margin: @base_unit 0 0 0;
-  font-family: dvc,"dejavu sans",  veranda, sans-serif;
 }
 h5, h6{
   font-size: 0.8em;
@@ -139,7 +122,7 @@ blockquote:before {
 blockquote p {
   margin-bottom: 0;
   font-size: 1em;
-  .textlight();
+  font-family: @font;
   font-weight: 300;
 }
 blockquote small {
@@ -243,7 +226,7 @@ figure{
   margin: 0;
 }
 figcaption{
-  font-family: .textlight;
+  font-family: @font;
   font-size: @base_unit/2;
 }
 
@@ -256,7 +239,7 @@ abbr:hover:after{
     background: @@subdom;
     bottom: @base_unit;
     left: 0;
-    color: @color_neg;
+    color: @dominant_neg;
     content: attr(title);
     padding:@base_unit/2 @base_unit;
     position: absolute;
@@ -311,7 +294,7 @@ label,
 input,
 select,
 textarea {
-  font-family: .textlight;
+  font-family: @font;
   display: block;
   text-align: center;
   .box-sizing(border-box);
@@ -489,7 +472,7 @@ button:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
-  background: @color_neg;
+  background: @dominant_neg;
   color: @dominant;
 }
 button:active,

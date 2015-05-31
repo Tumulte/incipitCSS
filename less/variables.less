@@ -35,8 +35,8 @@
 }
 .variation_sat(@current_value) when
     (@current_value >= 25%) and (@current_value <= 75%){
-  @sat_more: 20%;
-  @sat_less: -20%;
+  @sat_more: 40%;
+  @sat_less: -40%;
 }
 .variation_sat(@current_value) when (@current_value < 25%)
     and (@current_value > 11%){
@@ -61,7 +61,7 @@
 
 
 .color_scheme(@type @dominant){
- @color_neg: spin(desaturate(lighten(@dominant, 50%), 10%), 20%);
+ @dominant_neg: spin(desaturate(lighten(@dominant, 50%), 10%), 20%);
  @hue: hue(@dominant);
  @light: lightness(@dominant);
  .variation_light(@light);
@@ -87,13 +87,13 @@
  /*Oposite */
  @op_bg: hsl(@hue, @sat+@sat_less, 85%-@light_more);
  @op_bg_dark: hsl(@hue, @sat+@sat_less, 5%+@light_more);
- @op_tonic: spin(@dominant, 170%);
+ @op_tonic: spin(@dominant, 170);
  @hue_op: hue(@op_bg);
  @op_subdom: hsl(@hue, @sat, @light+@light_more);
  @op_subdom2: hsl(@hue, @sat, @light+@light_less);
  @hue_op_tonic: hue(@op_tonic);
- @op_tonic2: hsl(@hue_op_tonic, @sat, @light+@light_more);
- @op_tonic3: hsl(@hue_op_tonic, @sat, @light+@light_less);
+ @op_tonic2: spin(hsl(@hue_op_tonic, @sat, @light+@light_more), -20);
+ @op_tonic3: spin(hsl(@hue_op_tonic, @sat, @light+@light_less), -15);
 
  /* Analogous */
  @ana_subdom: spin(@dominant, 18%);
@@ -132,8 +132,6 @@
   }
 }
 
-/*The grey equivalent of the main color (saturation 0%*/
-
 /*Text colors*/
 @grey_main:#333;
 @grey_light:#999;
@@ -141,9 +139,3 @@
 @grey_lightest:#eaeaea;
 @grey_dark:#111;
 
-.textlight(){
-  font-family: dvl,"dejavu light",  veranda, sans-serif;
-}
-.textnormal(){
-  font-family: dvc,"dejavu sans",  veranda, sans-serif;
-}

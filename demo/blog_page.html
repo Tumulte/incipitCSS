@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="demo.less" rel="stylesheet/less" type="text/css">
     <script src="../js/jquery.js" type="text/javascript"></script>
-    <script src="../js/test.js" type="text/javascript"></script>
+    <script src="../js/incipit_live.js" type="text/javascript"></script>
     <script src="../js/less.min.js" type="text/javascript"></script>
   </head>
   <body id="demo_blog">
     <header>
+        <h1>Test page with 2 columns</h1><button>Log In</button><button>Sign up</button>
         <nav>
             <ul>
                 <li><a>Index</a></li>
-                <li><a>Page One</a></li>
+                <li class="selected"><a>Page One</a></li>
                 <li><a>Page Two</a></li>
                 <li><a>Page Three</a></li>
             </ul>
         </nav>
 
-      <h1>Test page with 2 columns</h1>
     </header>
     <main class="container_side_only make_cell col_main" >
     <article>
@@ -43,14 +43,14 @@
         <a class="see_more">Click to read more...</a>
     </article>
     </main>
-    <aside id="main_sidecol" class="container_side_only make_cell col_side" >
+    <aside id="main_sidecol" class="make_cell col_side" >
       <section>
         <a id="hh_menu" class="handheld" href="#main_sidecol">&#9776;</a>
         <a id="hh_close_menu" class="handheld rightify" href="#hh_menu">&#9654;</a>
         <h1>Latest articles</h1>
         <ul>
           <li>Article 1</li>
-          <li>Article 2</li>
+          <li class="selected">Article 2</li>
           <li>Article 3</li>
           <li>Article 4</li>
           <li>Article 5</li>

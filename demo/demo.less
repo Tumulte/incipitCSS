@@ -1,4 +1,4 @@
-@import '../less/styles.less';
+@import '../less/incipit.less';
 
 @font-face{
   font-family: 'unicode0';
@@ -17,6 +17,7 @@
   display: table-cell;
   vertical-align: middle;
   position: relative;
+  overflow: visible;
 }
 .color_test_inner{
   width: 32px;
@@ -48,14 +49,35 @@
   background: @dominant;
 }
 .color_neg{
-  background: @color_neg;
+  background: @dominant_neg;
+}
+.color_test:hover .color_title{
+  display: inline;
+  color: @dominant;
+  background: @dominant_neg;
 }
 .color_title{
+  display:none;
   font-size: 0.8em;
   position: absolute;
   bottom: -1.6em;
+  z-index: 10000;
 }
 #demo_blog{
+  header button{
+    float: right;
+  }
+  a{
+    color: @@tonic3;
+  }
+  > header h1{
+    padding: @base_unit/2 @base_unit*2;
+    display: inline-block;
+    margin: 0;
+    font-size: 1em;
+    color: @dominant;
+    height: @base_unit;
+  }
   nav ul{
     display: table;
     width: 100%;
@@ -64,21 +86,48 @@
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    height: @base_unit*2;
+  }
+  nav .selected a{
+    background: @dominant_neg;
+    color: @@tonic;
   }
   nav a{
-    border-bottom: @base_unit/2 @@tonic2 solid;
+    background: @@bg;
+    color: @@subdom2;
     display: block;
   }
   nav li:hover a{
-    border-color: @dominant;
+    background: @@bg_dark;
+    color: @dominant_neg;
+    text-decoration: none;
   }
   aside{
-      background: @@bg;
+      padding: 0 0 @base_unit @base_unit;
+      h1 {
+        color: @@subdom2;
+        border-bottom:solid @base_unit/2 @dominant_neg;
+        font-size: 1.25em;
+        margin: 1.28em 0 0 0;
+        line-height: 1.28em;
+      }
+      ul{
+        margin: 0;
+        padding: @base_unit/2 @base_unit @base_unit @base_unit;
+      }
+      li {
+        list-style: none;
+      }
+        li:hover:before {
+          content: "";
+          position: relative;
+          left: -@base_unit;
+          border-left: @@tonic solid @base_unit/2;
+        }
   }
 }
 #settings_container{
     width: 320px;
+    max-height: 100vh;
     overflow: auto;
     border-left: @base_unit/2 solid @dominant;
     border-top: @base_unit/2 solid @dominant;

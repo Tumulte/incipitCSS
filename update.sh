@@ -10,31 +10,8 @@ function copydata(){
 }
 
 function update(){
-  if [ -d "normalize.css" ]
-  then
-    cd normalize.css
-    git pull
-    cd ..
-  else
-    git clone https://github.com/necolas/normalize.css.git
-  fi
-
-  if [ -d "lesshat" ]
-  then
-    cd lesshat 
-    git pull
-    cd ..
-  else
-    git clone https://github.com/madebysource/lesshat.git
-  fi
-  if [ -d "html5-test-page" ]
-  then
-    cd html5-test-page 
-    git pull
-    cd ..
-  else
-    git clone https://github.com/cbracco/html5-test-page.git
-  fi
+  git submodule init
+  git submodule update
   echo 'copying the useful files to the main directory'
   copydata
 }
@@ -42,7 +19,7 @@ function update(){
 
 function makecss(){
   echo "make less files into css"
-  lessc --clean-css less/styles.less css/styles.css
+  lessc --clean-css less/incipit.less css/incipit.css
   lessc --clean-css less/normalize.less css/normalize.css
 
   cp ./demo/all_tags.html ./demo/all_tags_css.html

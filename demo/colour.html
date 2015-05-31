@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>A sample HTML5 two-column layout</title>
+    <meta name="description" content="Don't forget to add a 1-2 sentence description here.">
+    <meta name="keywords" content="Don't forget to add 20-30 important keywords here.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="demo.less" rel="stylesheet/less" type="text/css">
+    <style type="text/css">
+        .colour{
+            float:left;
+            width:3px;
+            font-size: 10px;
+        }
+    </style>
+    <script src="../js/lib/jquery.js" type="text/javascript"></script>
+    <script src="../js/settings.js" type="text/javascript"></script>
+    <script src="../js/Colour.js" type="text/javascript"></script>
+    <script src="../js/contrast.js" type="text/javascript"></script>
+    <script  type="text/javascript">
+
+        $(function(){
+            var color_params = {'hue_diff':0, 'sat':100, 'light':50, 'sat_diff':0, 'light_diff':0}
+            $('.color_parameters').change(function(){
+                $('#colors').html('');
+                name = $(this).attr('name');
+                value = parseInt($(this).val());
+                color_params[name] = value;
+                contrastPerHue(color_params);
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+  hue diff
+  <input class="color_parameters" name="hue_diff" value="0" type="number" />
+  sat
+  <input class="color_parameters" name="sat" value="100" type="number" />
+  sat diff
+  <input class="color_parameters" name="sat_diff" value="0" type="number" />
+  light
+  <input class="color_parameters" name="light" value="50" type="number" />
+  light_diff
+  <input class="color_parameters" name="light_diff" value="0" type="number" />
+  <div id="colors"></div>
+  </body>
+</html>

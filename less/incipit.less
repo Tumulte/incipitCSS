@@ -5,6 +5,12 @@
 
 /*main color scheme*/
 /*colors tests... You can remove it*/
+.color_title{
+    display: none;
+}
+.color_test:hover .color_title{
+    display: block;
+}
 .color_test{
   width: 192px;
   height: 192px;
@@ -18,12 +24,30 @@
   margin: auto auto;
 }
 @color_type: 'op';
-@dominant: #0FAED2;
+@dominant: lighten(#0FAED2, 3%);
+
 
 .color_scheme(@color_type, @dominant);
 /*End of colors*/
 
-
+@font-face {
+  font-family: "dvl";
+  src: url("../fonts/DejaVuSans-ExtraLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "dvc";
+  src: url("../fonts/DejaVuSansCondensed.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "dvo";
+  src: url("../fonts/DejaVuSansCondensed-Oblique.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 /*###1 : NAKED TAGS*/
 body{
   font-size: @font_main_size; 
@@ -59,7 +83,7 @@ h1,h2,h3,h4,h5,h6{
   font-family: @font;
   font-weight: 200;
   color:@grey_light;
-  color:@color_grey;
+  color:@grey_dom;
 }
 h1{
   font-size: 2.6em;

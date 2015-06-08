@@ -13,12 +13,20 @@
     @contrast: max(red(@color1), red(@color2))-min(red(@color1), red(@color2)) +
     max(blue(@color1), blue(@color2))-min(blue(@color1), blue(@color2)) +
     max(green(@color1), green(@color2))-min(green(@color1), green(@color2));
-    @lightness1: (red(@color1)*299+green(@color1)*299+blue(@color1)*299)/1000;
-    @lightness2: (red(@color2)*299+green(@color2)*299+blue(@color2)*299)/1000;
+}
+.brightness_contrast_check(@color1 @color2) {
+    @lightness1: (red(@color1)*299+green(@color1)*587+blue(@color1)*114)/1000;
+    @lightness2: (red(@color2)*299+green(@color2)*587+blue(@color2)*114)/1000;
     @contrast_lightness: max(@lightness1, @lightness2) - min(@lightness2, @lightness1);
 }
-.set_background(@color_main @color1 @color2) {
-
+.light_contrast_amount(@color) when (lightness(@color == 100)){
+    @light_contrast: .contrast_check(@color, lighten(@color, 1%);
+}
+.light_contrast_amount(@color) when (lightness(@color < 100)){
+    @light_contrast: .contrast_check(@color, darken(@color, 1%);
+}
+.get_steps() {
+    @contrast_steps: 500/@light_contrast;
 }
 
 

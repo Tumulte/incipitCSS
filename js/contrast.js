@@ -88,11 +88,9 @@ function positiveLimiter(value, limit) {
 function contrastPerHue(params) {
     contrastBars = '';
     for(i=1; i<=360; i++){
-        console.debug(params);
         sat_diff = positiveLimiter(params['sat']+params['sat_diff'], 100);
         light_diff = positiveLimiter(params['light']+params['light_diff'], 100);
         hue_diff = positiveLimiter(i+params['hue_diff'], 360);
-        console.debug(hue_diff);
         generated_c = new HSLColour(i, params['sat'], params['light'])
         generated_c2 = new HSLColour(hue_diff, sat_diff, light_diff)
         rgb = generated_c.getRGB();

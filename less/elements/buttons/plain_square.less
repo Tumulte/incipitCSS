@@ -1,0 +1,32 @@
+button,
+.buttonified,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
+  background: @grey_lighter;
+  color: @grey_main;
+  border: none;
+  line-height: 1.6em;
+  font-weight: bold;
+  padding:  @base_unit/2 @base_unit;
+  .drop-shadow(4px, 4px, 3px);
+}
+.buttonified{
+  display:inline-block;
+  text-decoration:none;
+}
+button:hover,
+.buttonified:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
+  background: @dominant_neg;
+  color: @dominant;
+}
+button:active,
+.buttonified:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+input[type="button"]:active,{/*buttonified exists to make a link looks like a button, when <button> is not semantic*/
+  .drop-shadow(0,0,0,0);
+}

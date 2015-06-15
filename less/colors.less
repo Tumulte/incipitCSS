@@ -1,34 +1,3 @@
-/*#1 : LESS GLOBAL VARIABLES*/
-/*@main_color: #C63B33;*/
-/*FONTS*/
-@font_main_size: 1.25em; /* 20px in most browsers - optimum size IMO*/
-/*PROPORTIONS*/
-@base_unit: 1.6em; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
-/*COLORS*/
-@color_warning: #fe0a07;
-@color_ok: #01ea07;
-
-
-.contrast_check(@color1 @color2) {
-    @contrast: max(red(@color1), red(@color2))-min(red(@color1), red(@color2)) +
-    max(blue(@color1), blue(@color2))-min(blue(@color1), blue(@color2)) +
-    max(green(@color1), green(@color2))-min(green(@color1), green(@color2));
-}
-.brightness_contrast_check(@color1 @color2) {
-    @lightness1: (red(@color1)*299+green(@color1)*587+blue(@color1)*114)/1000;
-    @lightness2: (red(@color2)*299+green(@color2)*587+blue(@color2)*114)/1000;
-    @contrast_lightness: max(@lightness1, @lightness2) - min(@lightness2, @lightness1);
-}
-.light_contrast_amount(@color) when (lightness(@color == 100)){
-    @light_contrast: .contrast_check(@color, lighten(@color, 1%);
-}
-.light_contrast_amount(@color) when (lightness(@color < 100)){
-    @light_contrast: .contrast_check(@color, darken(@color, 1%);
-}
-.get_steps() {
-    @contrast_steps: 500/@light_contrast;
-}
-
 
 .variation_light(@current_value) when
     (@current_value >= 25%) and (@current_value <= 75%){
@@ -144,27 +113,4 @@
  @grey_dom: desaturate(@dominant, 100%);
  @grey_cont: desaturate(@@bg, 100%);
 }
-
-.debug(@var) {
-  &:after {
-    content: "@{var}";
-    font-size: 20px;
-    background-color: #fff;
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
-    color: red;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-  }
-}
-
-/*Text colors*/
-@grey_main:#333;
-@grey_light:#999;
-@grey_lighter:#d0d0d0;
-@grey_lightest:#eaeaea;
-@grey_dark:#111;
 

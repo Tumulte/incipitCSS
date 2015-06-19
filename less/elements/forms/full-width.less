@@ -1,0 +1,176 @@
+@import "../../config.less";
+
+form {
+  margin: 0 0 1.6em;
+  padding: 1.6em;
+}
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid @grey-lighter;
+  height: @base-unit;
+}
+label,
+input,
+select,
+textarea {
+  font-family: @font-main;
+  display: block;
+  text-align: center;
+}
+input[type="radio"] + label,
+input[type="checkbox"] + label{
+  display: inline;
+}
+progress{
+  font-size: 1em;
+  height: 1.6em;
+  margin-bottom: 1.6em;
+  width: 100%;
+}
+input[type="file"]{
+  line-height: 1.6em;
+}
+input[type="search"]{
+  -webkit-appearance:none;/* for some reason, chromium doesn't accept search's height */
+  height: 3.2em; /* this + border-box removes the 2px border offset*/
+}
+textarea,
+select,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  height: 3.2em; /* this + border-box removes the 2px border offset*/
+  display: block;
+  width: ~"calc(100% - @{base-unit})";
+  padding: 0.95em 0.8em; 
+  color: @grey-light;
+  background-color: #fff;
+  border: 1px solid @grey-lighter;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 4px 7px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
+  transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
+}
+select{
+  width: 100%;
+}
+
+select:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid,
+input:invalid,
+textarea:invalid,
+input:invalid{
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-warning;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-warning;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-warning;
+}
+select:valid:focus,
+textarea:valid:focus,
+input:valid:focus{
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-ok;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-ok;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @color-ok;
+}
+textarea:focus,
+select:focus,
+input:focus,
+textarea:empty:focus,
+select:empty:focus,
+input:empty:focus{
+  border-color: #fff;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey-lighter;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey-lighter;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px @grey-lighter;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+  vertical-align: middle;
+}
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"],
+input[type="color"]{
+  width: auto;
+  display: inline-block;
+  line-height: 1.6em;
+  padding: 0;
+}
+input[type="color"]{
+  min-width:@base-unit*2;
+  display: block;
+  height: @base-unit;
+  margin:  @base-unit auto;
+}
+input[type="range"]{
+  margin: @base-unit;
+  width: ~"calc(100% - @{base-unit})";
+}
+.screen-reader-text,/*Hidden for those who see but read by screen readers for those who don't*/
+.assistive-text {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+textarea {
+  height: @base-unit*4;
+}
+/* Class for labelling required form items */
+.cptch-block input{
+  padding: 5px;
+}
+.required {
+  color: @color-warning;
+}
+
+.form-hint{
+  font-weight: 200;
+  text-align: right;
+  font-size: 0.8em;
+}
+.form-hint:before, .form-field-description:before{
+  content: "\2757";
+  font-size: 1.2em;
+  display: inline-block;
+  width: 26px;
+  .border-radius(30px);
+  background: #aaa;
+  color: #fff;
+  text-align: center;
+  margin-right: 5px; 
+}

@@ -1,18 +1,9 @@
 @import '../less/incipit.less';
 
-@font-face{
-  font-family: 'unicode0';
-  src: url('../fonts/u1f000.ttf');
-}
-
-@font-face{
-  font-family: 'unicode4';
-  src: url('../fonts/u1f400.ttf');
-}
 
 /*main color scheme*/
 /*colors tests... You can remove it*/
-.color_test{
+.color-test{
   width: 96px;
   height: 96px;
   display: table-cell;
@@ -20,7 +11,7 @@
   position: relative;
   overflow: visible;
 }
-.color_test_inner{
+.color-test-inner{
   width: 32px;
   height: 32px;
   margin: auto auto;
@@ -43,25 +34,25 @@
 .tonic3{
   background: @@tonic3;
 }
-.color_main{
+.color-main{
   background: @dominant;
 }
-.color_neg{
-  background: @dominant_neg;
+.color-neg{
+  background: @dominant-neg;
 }
-.color_test:hover .color_title{
+.color-test:hover .color-title{
   display: inline;
   color: @dominant;
-  background: @dominant_neg;
+  background: @dominant-neg;
 }
-.color_title{
+.color-title{
   display:none;
   font-size: 0.8em;
   position: absolute;
   bottom: -1.6em;
   z-index: 10000;
 }
-#demo_blog{
+#demo-blog{
   header button{
     float: right;
   }
@@ -69,12 +60,12 @@
     color: @@tonic3;
   }
   > header h1{
-    padding: @base_unit/2 @base_unit*2;
+    padding: @base-unit/2 @base-unit*2;
     display: inline-block;
     margin: 0;
     font-size: 1em;
     color: @dominant;
-    height: @base_unit;
+    height: @base-unit;
   }
   nav ul{
     display: table;
@@ -86,7 +77,7 @@
     vertical-align: middle;
   }
   nav .selected a{
-    background: @dominant_neg;
+    background: @dominant-neg;
     color: @@tonic;
   }
   nav a{
@@ -95,21 +86,21 @@
     display: block;
   }
   nav li:hover a{
-    color: @dominant_neg;
+    color: @dominant-neg;
     text-decoration: none;
   }
   aside{
-      padding: 0 0 @base_unit @base_unit;
+      padding: 0 0 @base-unit @base-unit;
       h1 {
         color: @@subdom2;
-        border-bottom:solid @base_unit/2 @dominant_neg;
+        border-bottom:solid @base-unit/2 @dominant-neg;
         font-size: 1.25em;
         margin: 1.28em 0 0 0;
         line-height: 1.28em;
       }
       ul{
         margin: 0;
-        padding: @base_unit/2 @base_unit @base_unit @base_unit;
+        padding: @base-unit/2 @base-unit @base-unit @base-unit;
       }
       li {
         list-style: none;
@@ -117,17 +108,17 @@
         li:hover:before {
           content: "";
           position: relative;
-          left: -@base_unit;
-          border-left: @@tonic solid @base_unit/2;
+          left: -@base-unit;
+          border-left: @@tonic solid @base-unit/2;
         }
   }
 }
-#settings_container{
+#settings-container{
     width: 320px;
     max-height: 100vh;
     overflow: auto;
-    border-left: @base_unit/2 solid @dominant;
-    border-top: @base_unit/2 solid @dominant;
+    border-left: @base-unit/2 solid @dominant;
+    border-top: @base-unit/2 solid @dominant;
 }
 
 

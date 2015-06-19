@@ -1,47 +1,46 @@
-@import "normalize.less";
-@import "lesshat.less";
+/* MAIN CONFIG */
 @import "config.less";
-@import "fonts.less";
-@import "colors.less";
-@import "elements/buttons/plain_square.less";
-@import "elements/forms/full_width.less";
+
+/* ELEMENTS STYLES */
+@import "elements/buttons/plain-square.less";
+@import "elements/forms/full-width.less";
 
 /*main color scheme*/
 /*colors tests... You can remove it*/
 html {
-    box-sizing: border-box;
+    font-size: @font-main-size;
+    font-family: @font-main;
+    line-height: @base-unit;
+    .box-sizing(border-box);
 }
 *, *:before, *:after {
-    box-sizing: inherit;
+    .box-sizing(inherit);
 }
-.color_title{
+.color-title{
     display: none;
 }
-.color_test:hover .color_title{
+.color-test:hover .color-title{
     display: block;
 }
-.color_test{
+.color-test{
   width: 192px;
   height: 192px;
   display: table-cell;
   vertical-align: middle;
   position: relative;
 }
-.color_test_inner{
+.color-test-inner{
   width: 96px;
   height: 96px;
   margin: auto auto;
 }
 
 
-.color_scheme(@color_type, @dominant);
+.color-scheme(@color-type, @dominant);
 /*End of colors*/
 
 /*###1 : NAKED TAGS*/
 body{
-  font-size: @font_main_size; 
-  font-family: @font;
-  line-height: @base_unit;
 }
 /* Links */
 a, a:visited{
@@ -51,32 +50,27 @@ a, a:visited{
 a:hover{
   text-decoration: underline;
 }
-/* Text */ 
+/* Text */
 small{
   font-size: 0.8em;
-  line-height: @base_unit*0.8;
+  line-height: @base-unit*0.8;
 }
 p{
-  margin-top: @base_unit;
-  margin-bottom: @base_unit
-}
-em, 
-i{
-  font-family: @font_italic;
+  margin-top: @base-unit;
+  margin-bottom: @base-unit
 }
 pre{
-  margin: @base_unit 0;
+  margin: @base-unit 0;
 }
 /* Headers  */
 h1,h2,h3,h4,h5,h6{
-  font-family: @font;
   font-weight: 200;
-  color:@grey_light;
-  color:@grey_dom;
+  color:@grey-light;
+  color:@grey-dom;
 }
 h1{
-  font-size: 2.6em;
-  line-height: 1.23077em;
+  font-size: 2*@base-unit;
+  line-height: 2*@base-unit;
   margin: 0.61538em 0 0;
 }
 
@@ -92,11 +86,11 @@ h3{
 }
 h4{
   font-size: 1em;
-  margin: @base_unit 0 0 0;
+  margin: @base-unit 0 0 0;
 }
 h5, h6{
   font-size: 0.8em;
-  margin: @base_unit/0.8 0 0 0;
+  margin: @base-unit/0.8 0 0 0;
 }
 
 /* Quotations */
@@ -117,14 +111,14 @@ cite:before{
 
 blockquote {
   font-family: Georgia,"Times New Roman",Times,serif;
-  padding: 0 0 0 @base_unit;
-  margin: 0 0 @base_unit @base_unit*2;
+  padding: 0 0 0 @base-unit;
+  margin: 0 0 @base-unit @base-unit*2;
   position: relative;
   font-style: italic;
 }
 blockquote:before {
   display: block;
-  color: @grey_lighter;
+  color: @grey-lighter;
   content: "\201C";
   font-size: 9.6em;
   position: absolute;
@@ -135,18 +129,18 @@ blockquote:before {
 blockquote p {
   margin-bottom: 0;
   font-size: 1em;
-  font-family: @font;
+  font-family: @font-main;
   font-weight: 300;
 }
 blockquote small {
   display: block;
-  color: @grey_light;
+  color: @grey-light;
   font-style: normal;
 }
 blockquote cite{
   display: block;
   text-align: right;
-  margin: @base_unit  @base_unit*2 0 0;
+  margin: @base-unit  @base-unit*2 0 0;
 }
 /* Summary (needs js in ff to appear properly) */
 summary{
@@ -161,33 +155,33 @@ summary:before{
   content: '\2A3A \00A0';
 }
 hr{
-  margin: 1.4em 0 @base_unit; /* basically the goal here is to make sure ...*/
-  height:@base_unit/8;        /* ...the line fits in the grid even with the vertical margin merge */
+  margin: 1.4em 0 @base-unit; /* basically the goal here is to make sure ...*/
+  height:@base-unit/8;        /* ...the line fits in the grid even with the vertical margin merge */
   border: none;
-  background: @grey_lighter;
+  background: @grey-lighter;
 }
 hr:before{
-  border: solid 1px @grey_light;
+  border: solid 1px @grey-light;
 }
 /* Lists */
 ol,
 ul{
-  margin: @base_unit;
+  margin: @base-unit;
 }
 dl{
-  margin: @base_unit 0;
+  margin: @base-unit 0;
 }
 dd{
   text-align: left;
   padding: 0;
   margin: 0;
-  font-size: @base_unit/2;
+  font-size: @base-unit/2;
   color: #555;
 }
 dt{
-  font-size: @base_unit/2;
+  font-size: @base-unit/2;
 }
-.bullet_less{ /*removes <li> decorations*/
+.bullet-less{ /*removes <li> decorations*/
   margin: 0;
   padding: 0;
   list-style:none;
@@ -196,7 +190,7 @@ dt{
 
 nav a, 
 nav a:visited{ 
-  color: @grey_dark;
+  color: @grey-dark;
 }
 /*Reseting the list styles when they are a list of links in a navigation element*/
 nav ul{
@@ -217,19 +211,19 @@ table{
 }
 th{
   text-align: left;
-  padding: @base_unit/2 @base_unit;
+  padding: @base-unit/2 @base-unit;
 }
 td{
-  padding: @base_unit/2 @base_unit;
+  padding: @base-unit/2 @base-unit;
 }
 tr:nth-child(even){
-  background: @grey_lightest;
+  background: @grey-lightest;
 }
 mark{
   font-weight: bold;
   background: @dominant;
   color: #fff;
-  padding: 0 @base_unit;
+  padding: 0 @base-unit;
 }
 img{
   max-width: 100%;
@@ -239,8 +233,8 @@ figure{
   margin: 0;
 }
 figcaption{
-  font-family: @font;
-  font-size: @base_unit/2;
+  font-family: @font-main;
+  font-size: @base-unit/2;
 }
 
 .tooltip, abbr{
@@ -250,11 +244,11 @@ figcaption{
 .tooltip:hover:after,
 abbr:hover:after{
     background: @@subdom;
-    bottom: @base_unit;
+    bottom: @base-unit;
     left: 0;
-    color: @dominant_neg;
+    color: @dominant-neg;
     content: attr(title);
-    padding:@base_unit/2 @base_unit;
+    padding:@base-unit/2 @base-unit;
     position: absolute;
     z-index: 10000;
 }
@@ -270,7 +264,7 @@ abbr:hover:before,
     z-index: 99;
 }
 /*Hiding a semantic element useful for accessibility*/
-.out_of_the_way{
+.out-of-the-way{
   position:absolute;
   top:-9999px; 
   left:auto;
@@ -278,37 +272,37 @@ abbr:hover:before,
 .rightify{
   text-align: right;
 }
-.container_side_only{
-  padding: 0 @base_unit;
+.container-side-only{
+  padding: 0 @base-unit;
 }
 .container{
-  padding: @base_unit*2 @base_unit;
+  padding: @base-unit*2 @base-unit;
 }
 
 audio {
-  height: @base_unit;
+  height: @base-unit;
   display: block;
 }
 /* Colums */
-.make_table{
+.make-table{
   display: table;
   width: 100%;
 }
 
-.make_cell{
+.make-cell{
   display: table-cell;
 }
-.col_side{
+.col-side{
   width:37.5%;
 }
-.col_main{
+.col-main{
   width:62.5%;
 }
 
 
 
 @media only screen and (min-width : 1300px) {
-  @main_font_size: 1em;
+  @main-font-size: 1em;
 }
 
 @media only screen and (min-width : 1200px) {
@@ -317,31 +311,30 @@ audio {
   }
 }
 @media only screen and (max-width : 1200px) {
-  .col_main{
+  .col-main{
     width: 100%;
   }
-  #main_sidecol{
+  #main-sidecol{
     position: fixed;
-    .box-sizing(border-box);
     top: 0;
     left: 100%;
     width: 100%;
     .transition(1s ease left);
   }
-  #hh_menu{
+  #hh-menu{
     position: absolute;
     top: 0;
     padding-top: 0.89em;
     left: -1.78em;
     font-size: 1.8em;
   }
-  #hh_close_menu{
+  #hh-close-menu{
     display: block;
     font-size: 1.8em;
     line-height: 1.78em;
   }
 
-  #main_sidecol:target{
+  #main-sidecol:target{
     left: 0;
   }
 
@@ -362,7 +355,7 @@ audio {
 
 @media only screen and (max-width : 320px) {
   body{
-    font-size: @font_main_size/1.5;
+    font-size: @font-main-size/1.5;
   }
   form{
     padding: 0;

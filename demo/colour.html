@@ -20,13 +20,13 @@
     <script  type="text/javascript">
 
         $(function(){
-            var color_params = {'hue_diff':0, 'sat':100, 'light':50, 'sat_diff':0, 'light_diff':0}
-            $('.color_parameters').change(function(){
+            var color-params = {'hue_diff':0, 'sat':100, 'light':50, 'sat_diff':0, 'light_diff':0}
+            $('.color-parameters').change(function(){
                 $('#colors').html('');
                 name = $(this).attr('name');
                 value = parseInt($(this).val());
-                color_params[name] = value;
-                contrastPerHue(color_params);
+                color-params[name] = value;
+                contrastPerHue(color-params);
             });
         });
     </script>
@@ -34,15 +34,15 @@
   </head>
   <body>
   hue diff
-  <input class="color_parameters" name="hue_diff" value="0" type="number" />
+  <input class="color-parameters" name="hue_diff" value="0" type="number" />
   sat
-  <input class="color_parameters" name="sat" value="100" type="number" />
+  <input class="color-parameters" name="sat" value="100" type="number" />
   sat diff
-  <input class="color_parameters" name="sat_diff" value="0" type="number" />
+  <input class="color-parameters" name="sat_diff" value="0" type="number" />
   light
-  <input class="color_parameters" name="light" value="50" type="number" />
-  light_diff
-  <input class="color_parameters" name="light_diff" value="0" type="number" />
+  <input class="color-parameters" name="light" value="50" type="number" />
+  light-diff
+  <input class="color-parameters" name="light_diff" value="0" type="number" />
   <div id="colors"></div>
   </body>
 </html>

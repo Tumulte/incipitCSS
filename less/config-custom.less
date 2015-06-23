@@ -1,0 +1,54 @@
+@import "normalize.less";
+@import "lesshat.less";
+@import "colors.less";
+/*FONTS SIZE*/
+@font-main-size: 1.25em; /* 20px in most browsers*/
+/*Line Height used as base unit*/
+@base-unit: 1.6rem; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
+
+/*FIXED COLORS*/
+@color-warning: #fe0a07;
+@color-ok: #01ea07;
+@grey-main:#333;
+@grey-light:#999;
+@grey-lighter:#d0d0d0;
+@grey-lightest:#eaeaea;
+@grey-dark:#111;
+
+/*Color scheme and main color*/
+@color-type: 'op';
+@dominant: lighten(#0FAED2, 3%);
+
+@font-main-url: "../fonts/DejaVuSans-ExtraLight.ttf";
+@font-alt-url:"../fonts/DejaVuSansCondensed.ttf";
+@font-third-url: "../fonts/DejaVuSansCondensed-Oblique.ttf";
+
+/* Font settings */
+/* Main font*/
+@font-face {
+  font-family: "font";
+  src: url(@font-main-url);
+  font-weight: normal;
+  font-weight: normal;
+}
+/* Alternative font */
+@font-face {
+  font-family: "font-alt";
+  src: url(@font-alt-url);
+  font-weight: normal;
+  font-style: normal;
+}
+/* third font (but 2 is plenty in most cases) */
+@font-face {
+  font-family: "font-third";
+  src: url(@font-third-url);
+  font-weight: normal;
+  font-style: normal;
+}
+/* Web safe fonts, choose the closest one to the font you're using */
+@sans-fail: bouh;
+@serif-fail: bla;
+
+@font-main: font, @sans-fail;
+@font-alt: alt-font, @sans-fail;
+@font-third: third-font, @sans-fail;

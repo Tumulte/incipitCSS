@@ -1,9 +1,9 @@
-<div class="container" >
+<form action="/incipitCSS/update_config.php" method="post" class="container" >
   <label>Font size (em)</label>
-  <input id="font_main_size" type="number" value="1.25" />
+  <input id="font_main_size" name="@font-main-size" type="number" value="1.25" />
   <label>Base unit (line height, margins....)(em)</label>
-  <input id="base_unit" type="number" value="1.6" />
-  <select id="color_type">
+  <input id="base_unit" name="@base-unit" type="number" value="1.6" />
+  <select id="color_type" name="@color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
@@ -53,5 +53,6 @@
     </div>
   </div>
   <br/>
-    <button id="close_settings">Close</button>
-</div>
+    <button type="submit" id="save_settings">Save</button>
+    <button type="button" id="close_settings">Close</button>
+</form>

@@ -1,16 +1,16 @@
-<form action="/incipitCSS/update_config.php" method="post" class="container" >
+<form action="/update_config.php" method="post" class="container" >
   <label>Font size (em)</label>
-  <input id="font_main_size" name="@font-main-size" type="number" value="1.25" />
+  <input id="font-main-size" name="@font-main-size" type="number" step="0.1" value="1.2" />
   <label>Base unit (line height, margins....)(em)</label>
-  <input id="base_unit" name="@base-unit" type="number" value="1.6" />
-  <select id="color_type" name="@color-type">
+  <input id="base-unit" name="@base-unit" type="number" step="0.1" value="1.6" />
+  <select id="color-type" name="@color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
   </select>
   <p>
-  <input id="dominant" type="color" />
+  <input id="dominant" type="color" name="@dominant" />
   </p>
   <div class="color_test color_main">
     <span class="color_title">@color_main</span>

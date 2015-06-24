@@ -1,7 +1,7 @@
 var incipitCSS = function(){
     function changeLessSetings()
     {
-        var possibleLessVariables = ['dominant', 'color_type', 'font_main_size', 'base_unit'];
+        var possibleLessVariables = ['dominant', 'color-type', 'font-main-size', 'base-unit'];
         if (lessVariables === undefined) {
             var lessVariables = [];
         }
@@ -21,15 +21,15 @@ var incipitCSS = function(){
             $("body")
             .append('<button id="settings">settings</button>');
             $("body")
-            .append('<div id="settings_container"></div>');
+            .append('<div id="settings-container"></div>');
             $('#settings').css({'position': 'fixed',
                                             'bottom': 0,
                                             'right': 0,
                                             'font-size': '0.8em',
                                            });
             $('#settings').click(function(){
-                $('#settings_container').load('../utils/settings.html', function(){
-                    $('#settings_container').css({'position': 'fixed',
+                $('#settings-container').load('../utils/settings.html', function(){
+                    $('#settings-container').css({'position': 'fixed',
                                                     'bottom': 0,
                                                     'right': 0,
                                                     'background': '#fff',
@@ -39,8 +39,8 @@ var incipitCSS = function(){
                                                     'border-left': '2px solid #555',
                                                     'border-top': '2px solid #555',
                                                    });
-                    $('#close_settings').click(function(){
-                        $('#settings_container').html('');
+                    $('#close-settings').click(function(){
+                        $('#settings-container').html('');
                     });
                     changeLessSetings();
                 });
@@ -52,9 +52,9 @@ var incipitCSS = function(){
 
 //snippets
 $('q').hover(function(){
-    current_content= $(this).html();
-    $(this).html(current_content+' <a href="'+$(this).attr('cite')+'" target="_blank"><img src="images/external.png" /></a>');
+    currentContent= $(this).html();
+    $(this).html(currentContent+' <a href="'+$(this).attr('cite')+'" target="_blank"><img src="images/external.png" /></a>');
 },
 function(){
-   $(this).html(current_content);
+   $(this).html(currentContent);
 });

@@ -19,29 +19,31 @@ while (false !== ($entry = readdir($handle))) {
 </script>
 <form action="/update_config.php" method="post" class="container" >
   <label>Font size (px)</label>
-  <input id="font-main-size" name="@font-main-size" data-unit="px" type="number" step="1"/>
+  <input class="less-var-change" id="font-main-size" name="@font-main-size" data-suffix="px" type="number" step="1"/>
   <label>Base unit (line height, margins....)(rem)</label>
-  <input id="base-unit" name="@base-unit" data-unit="rem" type="number" step="0.1"/>
-  <select id="color-type" name="@color-type">
+  <input id="base-unit" class="less-var-change" name="@base-unit"  data-suffix="rem" type="number" step="0.1"/>
+  <label>Main font</label>
+  <select id="font-main-url" class="less-var-change" name="@font-main-url">
+    <?php echo $fontList; ?>
+  </select>
+  <label>Alternative font</label>
+  <select id="font-alt-url" class="less-var-change" name="@font-main-url">
+    <?php echo $fontList; ?>
+  </select>
+  <label>Third font</label>
+  <select id="font-third-url" class="less-var-change" name="@font-main-url">
+    <?php echo $fontList; ?>
+  </select>
+  <p>
+  <label>Main color</label>
+  <input id="dominant" type="color" class="less-var-change" name="@dominant" />
+  <label>Color scheme type</label>
+  <select id="color-type" class="less-var-change" name="@color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
   </select>
-  <label>Main font</label>
-  <select id="font-main-url" name="@font-main-url">
-    <?php echo $fontList; ?>
-  </select>
-  <label>Alternative font</label>
-  <select id="font-alt-url" name="@font-main-url">
-    <?php echo $fontList; ?>
-  </select>
-  <label>Third font</label>
-  <select id="font-third-url" name="@font-main-url">
-    <?php echo $fontList; ?>
-  </select>
-  <p>
-  <input id="dominant" type="color" name="@dominant" />
   </p>
   <div class="color_test color_main">
     <span class="color_title">@color_main</span>

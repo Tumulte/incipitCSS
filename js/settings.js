@@ -1,21 +1,21 @@
+function inputToLessVariableConverter(this_input) {
+    //TODO : make a methode to turn undefined into ''
+    value += this_input.attr('data-prefix');
+    value = this_input.val();
+    value += this_input.attr('data-suffix');
+    return value;
+}
+function changeLessSetings()
+{
+    var lessVariables = [];
+    var changedVariable = function(this_input){
+                                                value = inputToLessVariableConverter(this_input);
+                                                lessVariables[this_var.attr('id')] = value;
+                                                less.modifyVars(lessVariables);
+                                            };
+    return changedVariable;
+}
 var incipitCSS = function(){
-    function changeLessSetings()
-    {
-        var possibleLessVariables = ['dominant', 'color-type', 'font-main-size', 'base-unit'];
-        if (lessVariables === undefined) {
-            var lessVariables = [];
-        }
-        for (index in possibleLessVariables) {
-            $('#'+possibleLessVariables[index]).change(function(){
-                value = $(this).val();
-                if (!isNaN(parseInt(value))){
-                    value += $(this).attr('data-unit');
-                }
-                lessVariables[$(this).attr('id')] = value;
-                less.modifyVars(lessVariables)
-            });
-        }
-    }
     return {
         settings : function() {
             $("body")
@@ -42,7 +42,10 @@ var incipitCSS = function(){
                     $('#close-settings').click(function(){
                         $('#settings-container').html('');
                     });
-                    changeLessSetings();
+                    var settings = changeLessSetings();
+                    $('.less-var-change').change(function(){
+                        settings($(this));
+                    });
                 });
             });
         }

@@ -1,13 +1,44 @@
+<?php
+$handle = opendir('../fonts') or die ("Can't find of read font folder");
+$fontList = '';
+while (false !== ($entry = readdir($handle))) {
+    if ($entry == '.' or $entry == '..') {
+        continue;
+    } else {
+        $fontList .= '"<option value="'.$entry.'">'.$entry.'</option>';
+    }
+}
+?>
+<script type="text/javascript">
+    $(function(){
+        var baseUnit = parseInt($('html').css("line-height"));
+        var fontMainSize = parseInt($('html').css("font-size"));
+        $('#font-main-size').attr('value', fontMainSize);
+        $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
+    });
+</script>
 <form action="/update_config.php" method="post" class="container" >
-  <label>Font size (em)</label>
-  <input id="font-main-size" name="@font-main-size" type="number" step="0.1" value="1.2" />
-  <label>Base unit (line height, margins....)(em)</label>
-  <input id="base-unit" name="@base-unit" type="number" step="0.1" value="1.6" />
+  <label>Font size (px)</label>
+  <input id="font-main-size" name="@font-main-size" data-unit="px" type="number" step="1"/>
+  <label>Base unit (line height, margins....)(rem)</label>
+  <input id="base-unit" name="@base-unit" data-unit="rem" type="number" step="0.1"/>
   <select id="color-type" name="@color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
+  </select>
+  <label>Main font</label>
+  <select id="font-main-url" name="@font-main-url">
+    <?php echo $fontList; ?>
+  </select>
+  <label>Alternative font</label>
+  <select id="font-alt-url" name="@font-main-url">
+    <?php echo $fontList; ?>
+  </select>
+  <label>Third font</label>
+  <select id="font-third-url" name="@font-main-url">
+    <?php echo $fontList; ?>
   </select>
   <p>
   <input id="dominant" type="color" name="@dominant" />

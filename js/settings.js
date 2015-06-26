@@ -9,7 +9,7 @@ var incipitCSS = function(){
             $('#'+possibleLessVariables[index]).change(function(){
                 value = $(this).val();
                 if (!isNaN(parseInt(value))){
-                    value += 'em';
+                    value += $(this).attr('data-unit');
                 }
                 lessVariables[$(this).attr('id')] = value;
                 less.modifyVars(lessVariables)
@@ -28,7 +28,7 @@ var incipitCSS = function(){
                                             'font-size': '0.8em',
                                            });
             $('#settings').click(function(){
-                $('#settings-container').load('../utils/settings.html', function(){
+                $('#settings-container').load('../utils/settings.php', function(){
                     $('#settings-container').css({'position': 'fixed',
                                                     'bottom': 0,
                                                     'right': 0,

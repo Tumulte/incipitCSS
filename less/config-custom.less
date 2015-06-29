@@ -2,9 +2,9 @@
 @import "lesshat.less";
 @import "colors.less";
 /*FONTS SIZE*/
-@font-main-size: 16px;
+@font-main-size: 16px; /* 20px in most browsers*/
 /*Line Height used as base unit*/
-@base-unit: 1.6rem;
+@base-unit: 1.6rem; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
 
 /*FIXED COLORS*/
 @color-warning: #fe0a07;
@@ -17,7 +17,7 @@
 
 /*Color scheme and main color*/
 @color-type: ana;
-@dominant: #9c4023;
+@dominant: lighten(#0FAED2, 3%);
 
 @font-main-url: "../fonts/DejaVuSans-ExtraLight.ttf";
 @font-alt-url:"../fonts/DejaVuSansCondensed.ttf";

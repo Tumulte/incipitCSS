@@ -8,6 +8,7 @@ while (false !== ($entry = readdir($handle))) {
         $fontList .= '"<option value="'.$entry.'">'.$entry.'</option>';
     }
 }
+$fontLocation = "../fonts/";
 ?>
 <script type="text/javascript">
     $(function(){
@@ -17,21 +18,21 @@ while (false !== ($entry = readdir($handle))) {
         $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
     });
 </script>
-<form action="/update_config.php" method="post" class="container" >
+<div class="container" >
   <label>Font size (px)</label>
   <input class="less-var-change" id="font-main-size" name="@font-main-size" data-suffix="px" type="number" step="1"/>
   <label>Base unit (line height, margins....)(rem)</label>
   <input id="base-unit" class="less-var-change" name="@base-unit"  data-suffix="rem" type="number" step="0.1"/>
   <label>Main font</label>
-  <select id="font-main-url" class="less-var-change" name="@font-main-url">
+  <select id="font-main-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
   </select>
   <label>Alternative font</label>
-  <select id="font-alt-url" class="less-var-change" name="@font-main-url">
+  <select id="font-alt-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
   </select>
   <label>Third font</label>
-  <select id="font-third-url" class="less-var-change" name="@font-main-url">
+  <select id="font-third-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
   </select>
   <p>
@@ -50,6 +51,9 @@ while (false !== ($entry = readdir($handle))) {
   </div>
   <div class="color_test subdom">
     <span class="color_title">@subdom</span>
+    <input type="range"/>
+    <input type="range"/>
+    <input type="range"/>
   </div>
   <div class="color_test subdom2">
     <span class="color_title">@subdom2</span>
@@ -86,6 +90,6 @@ while (false !== ($entry = readdir($handle))) {
     </div>
   </div>
   <br/>
-    <button type="submit" id="save_settings">Save</button>
-    <button type="button" id="close_settings">Close</button>
+    <button type="submit" id="save-settings">Save</button>
+    <button type="button" id="close-settings">Close</button>
 </form>

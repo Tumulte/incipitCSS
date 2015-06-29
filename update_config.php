@@ -1,20 +1,20 @@
 <?php
-$fileText = file("./less/config.less") or die("Can't read les config file");
-$modifiedFileText = array_map('replaceLessProperty', $fileText);
-function replaceLessProperty($fileTextLine)
+$configFile = file("./less/config.less") or die("Can't read les config file");
+$modifiedFileText = array_map('replaceLessProperty', $configFile);
+file_put_contents('./less/config-custom.less', implode('', $modifiedFileText)) or die("can't write custom config");
+function replaceLessProperty($configFileLine)
 {
-    //checker scope
-    $changedProperty = $_POST;
-    $lineVariable = extractLessVariableOfLine($fileTextLine);
-    if (array_key_exists($lineVariable, $changedProperty)) {
-        var_dump( $changedProperty[$lineVariable]);
-        return $lineVariable.": ".$changedProperty[$lineVariable].";\n";
+    $newProperties = $_POST['data'];
+    $lessVariable = extractLessVariableName($configFileLine);
+    $newPropertyValue = $newProperties[$lessVariable];
+    if (array_key_exists($lessVariable, $newProperties) &&  $newPropertyValue) {
+        return '@'.$lessVariable.": ".$newPropertyValue.";\n";
     } else {
-        return $fileTextLine;
+        return $configFileLine;
     }
 }
-function extractLessVariableOfLine($line)
+function extractLessVariableName($line)
 {
-    return trim(explode(':', $line)[0]);
+    $variable =  trim(explode(':', $line)[0]);
+    return trim($variable, '@');
 }
-file_put_contents('./less/config-custom.less', implode('', $modifiedFileText)) or die("can't write custom config");

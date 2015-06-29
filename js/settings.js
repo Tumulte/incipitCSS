@@ -1,17 +1,30 @@
-function inputToLessVariableConverter(this_input) {
-    //TODO : make a methode to turn undefined into ''
-    value += this_input.attr('data-prefix');
-    value = this_input.val();
-    value += this_input.attr('data-suffix');
+function inputToLessVariableConverter(thisInput) {
+    console.debug(thisInput);
+    var value = undefinedToEmptyStr(thisInput.attr('data-prefix'));
+    value += undefinedToEmptyStr(thisInput.val());
+    value += undefinedToEmptyStr(thisInput.attr('data-suffix'));
+    console.debug(value);
     return value;
+}
+function undefinedToEmptyStr(varToCheck) {
+    if (varToCheck === undefined) {
+        return '';
+    } else {
+        return varToCheck;
+    }
 }
 function changeLessSetings()
 {
-    var lessVariables = [];
-    var changedVariable = function(this_input){
-                                                value = inputToLessVariableConverter(this_input);
-                                                lessVariables[this_var.attr('id')] = value;
-                                                less.modifyVars(lessVariables);
+    var lessVariables = {};
+    var changedVariable = function(thisInput){
+                                                if(thisInput) {
+                                                    value = inputToLessVariableConverter(thisInput);
+                                                    lessVariables[thisInput.attr('id')] = value;
+                                                    less.modifyVars(lessVariables);
+                                                } else {
+                                                    console.debug(lessVariables);
+                                                    return lessVariables;
+                                                }
                                             };
     return changedVariable;
 }
@@ -45,6 +58,10 @@ var incipitCSS = function(){
                     var settings = changeLessSetings();
                     $('.less-var-change').change(function(){
                         settings($(this));
+                    });
+                    $(document).on('click', '#save-settings', function() {
+                        console.debug(settings());
+                        $.post('/update_config.php', {data: settings()});
                     });
                 });
             });

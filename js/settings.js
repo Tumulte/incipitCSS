@@ -17,17 +17,22 @@ function changeLessSetings()
 {
     var lessVariables = {};
     var changedVariable = function(thisInput){
-                                                if(thisInput) {
-                                                    value = inputToLessVariableConverter(thisInput);
-                                                    lessVariables[thisInput.attr('id')] = value;
-                                                    less.modifyVars(lessVariables);
-                                                } else {
-                                                    console.debug(lessVariables);
-                                                    return lessVariables;
-                                                }
-                                            };
+                              if(thisInput) {
+                                  value = inputToLessVariableConverter(thisInput);
+                                  lessVariables[thisInput.attr('id')] = value;
+                                  less.modifyVars(lessVariables);
+                              } else {
+                                  console.debug(lessVariables);
+                                  return lessVariables;
+                              }
+                          };
     return changedVariable;
 }
+function changeColor(thisRange) {
+    percentage = thisRange.val();
+    type = thisRange.attr('data-type');
+}
+
 var incipitCSS = function(){
     return {
         settings : function() {
@@ -58,6 +63,9 @@ var incipitCSS = function(){
                     var settings = changeLessSetings();
                     $('.less-var-change').change(function(){
                         settings($(this));
+                    });
+                    $('.color-change').change(function(){
+                        changeColor($(this));
                     });
                     $(document).on('click', '#save-settings', function() {
                         console.debug(settings());

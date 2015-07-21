@@ -29,7 +29,7 @@ function changeLessSetings()
     return changedVariable;
 }
 function changeColor(thisRange) {
-    color = "#ff0000";
+    color = thisRange.parents().css("background-color");
     colorParameters = "hue(saturation(value("+color;
     thisRange.parent().children('.color-change').each(function(){
         colorParameters += ","+$(this).val()+"%)";

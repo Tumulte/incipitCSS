@@ -29,6 +29,12 @@ function changeLessSetings()
     return changedVariable;
 }
 function changeColor(thisRange) {
+    color = "#ff0000";
+    colorParameters = "hue(saturation(value("+color;
+    thisRange.parent().children('.color-change').each(function(){
+        colorParameters += ","+$(this).val()+"%)";
+    });
+    console.debug(colorParameters);
     percentage = thisRange.val();
     type = thisRange.attr('data-type');
 }

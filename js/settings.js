@@ -34,9 +34,7 @@ function changeColor(thisRange) {
     thisRange.parent().children('.color-change').each(function(){
         colorParameters += ","+$(this).val()+"%)";
     });
-    console.debug(colorParameters);
-    percentage = thisRange.val();
-    type = thisRange.attr('data-type');
+    return colorParameters;
 }
 
 var incipitCSS = function(){
@@ -71,7 +69,7 @@ var incipitCSS = function(){
                         settings($(this));
                     });
                     $('.color-change').change(function(){
-                        changeColor($(this));
+                        writeColorChange($(this));
                     });
                     $(document).on('click', '#save-settings', function() {
                         console.debug(settings());
@@ -82,6 +80,10 @@ var incipitCSS = function(){
         }
     };
 }();
+function writeColorChange(thisRange) {
+    lessModifiedColor = changeColor(thisRange);
+    thisRange.siblings(".color-mod").val(lessModifiedColor);
+}
 
 
 //snippets

@@ -54,7 +54,7 @@ $fontLocation = "../fonts/";
     <input type="range" class="color-change" data-type="hue" />
     <input type="range" class="color-change" data-type="saturation"/>
     <input type="range" class="color-change" data-type="light"/>
-    <input type="text" name="@subdom" />
+    <input type="text" class="color-mod" name="@subdom" />
   </div>
   <div class="color_test subdom2">
     <span class="color_title">@subdom2</span>

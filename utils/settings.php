@@ -46,48 +46,44 @@ $fontLocation = "../fonts/";
     <option value="sat">Saturation variations</option>
   </select>
   </p>
-  <div class="color_test color_main">
-    <span class="color_title">@color_main</span>
+  <div class="color-sample color_main">
+    <span class="color-title">@color_main</span>
   </div>
-  <div class="color_test subdom">
-    <span class="color_title">@subdom</span>
-    <input type="range" class="color-change" data-type="hue" />
-    <input type="range" class="color-change" data-type="saturation"/>
-    <input type="range" class="color-change" data-type="light"/>
-    <input type="text" class="color-mod" name="@subdom" />
+  <div class="color-sample subdom">
+    <span class="color-title">@subdom</span>
   </div>
-  <div class="color_test subdom2">
-    <span class="color_title">@subdom2</span>
+  <div class="color-sample subdom2">
+    <span class="color-title">@subdom2</span>
   </div>
-  <div class="color_test bg">
-    <span class="color_title">@bg</span>
+  <div class="color-sample bg">
+    <span class="color-title">@bg</span>
   </div>
-  <div class="color_test tonic">
-    <span class="color_title">@tonic</span>
+  <div class="color-sample tonic">
+    <span class="color-title">@tonic</span>
   </div>
-  <div class="color_test bg">
-    <span class="color_title">@color_main (@bg)</span>
-    <div class="color_test_inner color_main">
+  <div class="color-sample bg">
+    <span class="color-title">@color_main (@bg)</span>
+    <div class="color-sample_inner color_main">
     </div>
   </div>
-  <div class="color_test tonic2">
-    <span class="color_title">@subdom2 (@tonic2)</span>
-    <div class="color_test_inner subdom2">
+  <div class="color-sample tonic2">
+    <span class="color-title">@subdom2 (@tonic2)</span>
+    <div class="color-sample_inner subdom2">
     </div>
   </div>
-  <div class="color_test tonic3">
-    <span class="color_title">@subdom (@tonic3)</span>
-    <div class="color_test_inner subdom">
+  <div class="color-sample tonic3">
+    <span class="color-title">@subdom (@tonic3)</span>
+    <div class="color-sample_inner subdom">
     </div>
   </div>
-  <div class="color_test subdom">
-    <span class="color_title">@color_neg (@color_main)</span>
-    <div class="color_test_inner color_main">
+  <div class="color-sample subdom">
+    <span class="color-title">@color_neg (@color_main)</span>
+    <div class="color-sample_inner color_main">
     </div>
   </div>
-  <div class="color_test tonic2">
-    <span class="color_title">@tonic2 (@color_neg)</span>
-    <div class="color_test_inner color_neg">
+  <div class="color-sample tonic2">
+    <span class="color-title">@tonic2 (@color_neg)</span>
+    <div class="color-sample_inner color_neg">
     </div>
   </div>
   <br/>

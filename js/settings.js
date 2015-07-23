@@ -68,8 +68,8 @@ var incipitCSS = function(){
                     $('.less-var-change').change(function(){
                         settings($(this));
                     });
-                    $('.color-change').change(function(){
-                        writeColorChange($(this));
+                    $('.color-sample').click(function() {
+                        $(this).html(colorEditionInputs($(this)));
                     });
                     $(document).on('click', '#save-settings', function() {
                         console.debug(settings());
@@ -83,6 +83,23 @@ var incipitCSS = function(){
 function writeColorChange(thisRange) {
     lessModifiedColor = changeColor(thisRange);
     thisRange.siblings(".color-mod").val(lessModifiedColor);
+}
+function colorEditionInputs(thisColor) {
+    colorRGB = thisColor.css("background-color");
+    colorHSLvalue = colorRGB.replace(/^rgb\(/,'').replace(/\)$/,'').split(',');
+    color = new RGBColour(colorHSLvalue[0], colorHSLvalue[1], colorHSLvalue[2]);
+    colorHSL = color.getHSL();
+    colorLessVariableName = thisColor.children('.color-title').html();
+    rangeInputHTML = '';
+    for(var parameter in colorHSL) {
+        rangeInputHTML += '<input type="range" value="'+colorHSL[parameter]+'" class="color-change"/>';
+    }
+
+    rangeInputHTML += '<input type="text" class="color-mod" name="'+colorLessVariableName+'" />';
+    $('.color-change').change(function(){
+        writeColorChange($(this));
+    });
+    return rangeInputHTML;
 }
 
 

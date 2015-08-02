@@ -1,20 +1,19 @@
 @import '../less/incipit.less';
 
-
 /*main color scheme*/
 /*colors tests... You can remove it*/
-.color-sample{
-  width: 96px;
-  height: 96px;
-  display: table-cell;
-  vertical-align: middle;
-  position: relative;
-  overflow: visible;
+.color-sample {
+  width: 100%;
+  min-height: 40px;
+  padding: @base-unit;
 }
 .color-test-inner{
   width: 32px;
   height: 32px;
   margin: auto auto;
+}
+.dominant{
+  background: @dominant;
 }
 .subdom{
   background: @@subdom;
@@ -112,13 +111,6 @@
           border-left: @@tonic solid @base-unit/2;
         }
   }
-}
-#settings-container{
-    width: 320px;
-    max-height: 100vh;
-    overflow: auto;
-    border-left: @base-unit/2 solid @dominant;
-    border-top: @base-unit/2 solid @dominant;
 }
 
 

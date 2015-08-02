@@ -14,76 +14,76 @@ $fontLocation = "../fonts/";
     $(function(){
         var baseUnit = parseInt($('html').css("line-height"));
         var fontMainSize = parseInt($('html').css("font-size"));
+        var dominantColor = rgbToHex($('.dominant').css('background-color'));
         $('#font-main-size').attr('value', fontMainSize);
         $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
+        $('#dominant').attr('value', dominantColor);
     });
+    function rgbToHex(rgb) {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+    function hex(x) {
+        var hexDigits = new Array ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+        return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    }
 </script>
-<div class="container" >
-  <label>Font size (px)</label>
+<form class="container" >
+  <label>Font size (px)
   <input class="less-var-change" id="font-main-size" name="@font-main-size" data-suffix="px" type="number" step="1"/>
-  <label>Base unit (line height, margins....)(rem)</label>
+  </label>
+  <label>Base unit (line height, margins....)(rem)
   <input id="base-unit" class="less-var-change" name="@base-unit"  data-suffix="rem" type="number" step="0.1"/>
-  <label>Main font</label>
+  </label>
+  <label>Main font
   <select id="font-main-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
   </select>
-  <label>Alternative font</label>
+  </label>
+  <label>Alternative font
   <select id="font-alt-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
-  </select>
-  <label>Third font</label>
+  </select></label>
+  <label>Third font
   <select id="font-third-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
     <?php echo $fontList; ?>
   </select>
+  </label>
   <p>
-  <label>Main color</label>
+  <label>Main color
   <input id="dominant" type="color" class="less-var-change" name="@dominant" />
-  <label>Color scheme type</label>
+  </label>
+  <label>Color scheme type
   <select id="color-type" class="less-var-change" name="@color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
     <option value="sat">Saturation variations</option>
   </select>
+  </label>
   </p>
-  <div class="color-sample color_main">
-    <span class="color-title">@color_main</span>
-  </div>
+    <button id="customize-colors" type="button">Customize</button>
+    <div class="color-sample dominant">
+        <span class="color-title">dominant</span>
+    </div>
   <div class="color-sample subdom">
-    <span class="color-title">@subdom</span>
+    <span class="color-title">subdom</span>
   </div>
   <div class="color-sample subdom2">
-    <span class="color-title">@subdom2</span>
+    <span class="color-title">subdom2</span>
   </div>
   <div class="color-sample bg">
-    <span class="color-title">@bg</span>
+    <span class="color-title">bg</span>
   </div>
   <div class="color-sample tonic">
-    <span class="color-title">@tonic</span>
-  </div>
-  <div class="color-sample bg">
-    <span class="color-title">@color_main (@bg)</span>
-    <div class="color-sample_inner color_main">
-    </div>
+    <span class="color-title">tonic</span>
   </div>
   <div class="color-sample tonic2">
-    <span class="color-title">@subdom2 (@tonic2)</span>
-    <div class="color-sample_inner subdom2">
+    <span class="color-title">tonic2</span>
     </div>
   </div>
   <div class="color-sample tonic3">
-    <span class="color-title">@subdom (@tonic3)</span>
-    <div class="color-sample_inner subdom">
-    </div>
-  </div>
-  <div class="color-sample subdom">
-    <span class="color-title">@color_neg (@color_main)</span>
-    <div class="color-sample_inner color_main">
-    </div>
-  </div>
-  <div class="color-sample tonic2">
-    <span class="color-title">@tonic2 (@color_neg)</span>
-    <div class="color-sample_inner color_neg">
+    <span class="color-title">tonic3</span>
     </div>
   </div>
   <br/>

@@ -1,9 +1,7 @@
 function inputToLessVariableConverter(thisInput) {
-    console.debug(thisInput);
     var value = undefinedToEmptyStr(thisInput.attr('data-prefix'));
     value += undefinedToEmptyStr(thisInput.val());
     value += undefinedToEmptyStr(thisInput.attr('data-suffix'));
-    console.debug(value);
     return value;
 }
 function undefinedToEmptyStr(varToCheck) {
@@ -16,98 +14,152 @@ function undefinedToEmptyStr(varToCheck) {
 function changeLessSetings()
 {
     var lessVariables = {};
-    var changedVariable = function(thisInput){
-                              if(thisInput) {
-                                  value = inputToLessVariableConverter(thisInput);
-                                  lessVariables[thisInput.attr('id')] = value;
-                                  less.modifyVars(lessVariables);
-                              } else {
-                                  console.debug(lessVariables);
-                                  return lessVariables;
-                              }
-                          };
-    return changedVariable;
-}
-function changeColor(thisRange) {
-    color = thisRange.parents().css("background-color");
-    colorParameters = "hue(saturation(value("+color;
-    thisRange.parent().children('.color-change').each(function(){
-        colorParameters += ","+$(this).val()+"%)";
-    });
-    return colorParameters;
+    return function(thisInput){
+                                  if(thisInput) {
+                                      lessVariables[thisInput.attr('id')] = inputToLessVariableConverter(thisInput);
+                                      console.debug(lessVariables);
+                                      less.modifyVars(lessVariables);
+                                  } else {
+                                      return lessVariables;
+                                  }
+                              };
 }
 
-var incipitCSS = function(){
+var incipitCSS = function() {
     return {
-        settings : function() {
-            $("body")
-            .append('<button id="settings">settings</button>');
-            $("body")
-            .append('<div id="settings-container"></div>');
-            $('#settings').css({'position': 'fixed',
-                                            'bottom': 0,
-                                            'right': 0,
-                                            'font-size': '0.8em',
-                                           });
-            $('#settings').click(function(){
-                $('#settings-container').load('../utils/settings.php', function(){
-                    $('#settings-container').css({'position': 'fixed',
-                                                    'bottom': 0,
-                                                    'right': 0,
-                                                    'background': '#fff',
-                                                    'font-size': '0.8em',
-                                                    'width': '320px',
-                                                    'overflow': 'auto',
-                                                    'border-left': '2px solid #555',
-                                                    'border-top': '2px solid #555',
-                                                   });
-                    $('#close-settings').click(function(){
-                        $('#settings-container').html('');
-                    });
-                    var settings = changeLessSetings();
-                    $('.less-var-change').change(function(){
-                        settings($(this));
-                    });
-                    $('.color-sample').click(function() {
-                        $(this).html(colorEditionInputs($(this)));
-                    });
-                    $(document).on('click', '#save-settings', function() {
-                        console.debug(settings());
-                        $.post('/update_config.php', {data: settings()});
-                    });
+        settings: function () {
+            $("body") .append('<button id="settings">settings</button>'+
+                              '<div id="settings-container"></div>');
+            $('#settings').click(function () {
+                $.ajax({
+                    url: '/utils/settings.php',  type: 'GET', success: function (data) {
+                        $('#settings-container').html(data);
+                        $('#close-settings').click(function () {
+                            $('#settings-container').html('');
+                        });
+                        var settings = changeLessSetings();
+                        $('#settings-container').on('change','.less-var-change', function () {
+                            settings($(this));
+                        });
+                        $(document).on('click', '#save-settings', function () {
+                            $.post('/update_config.php', {data: settings()});
+                        });
+                        $("#settings-container").on('click', '#customize-colors', function(){
+                            toggleCustomColors();
+                        })
+                    }
                 });
             });
         }
-    };
+    }
 }();
-function writeColorChange(thisRange) {
-    lessModifiedColor = changeColor(thisRange);
-    thisRange.siblings(".color-mod").val(lessModifiedColor);
+function toggleCustomColors(colorType) {
+    if($(".color-custom-settings").length > 0) {
+        $('.color-custom-settings').remove();
+    } else {
+        $('.color-sample').not('.dominant').each(function(){
+            $(this).append('<div class="color-custom-settings">'+colorEditionInputs($(this))+'</div>');
+        });
+    }
 }
-function colorEditionInputs(thisColor) {
-    colorRGB = thisColor.css("background-color");
-    colorHSLvalue = colorRGB.replace(/^rgb\(/,'').replace(/\)$/,'').split(',');
-    color = new RGBColour(colorHSLvalue[0], colorHSLvalue[1], colorHSLvalue[2]);
-    colorHSL = color.getHSL();
-    colorLessVariableName = thisColor.children('.color-title').html();
-    rangeInputHTML = '';
-    for(var parameter in colorHSL) {
-        rangeInputHTML += '<input type="range" value="'+colorHSL[parameter]+'" class="color-change"/>';
+function colorEditionInputs(element) {
+    var colorHSLArray = backgroundRGBToHSLArray(element);
+    var colorLessVariableName = element.children('.color-title').html();
+    var rangeInputHTML = '';
+    for(var parameter in colorHSLArray) {
+        if(parameter === 'h') {
+            var max = 360;
+        }else{
+            var max = 100;
+        }
+        rangeInputHTML += '<input type="range" value="' + colorHSLArray[parameter] + '" class="color-change" max="'+max+'"/>';
     }
 
-    rangeInputHTML += '<input type="text" class="color-mod" name="'+colorLessVariableName+'" />';
-    $('.color-change').change(function(){
+    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="color-mod less-var-change" name="@'+colorLessVariableName+'" />';
+    $('.color-change').on('mouseup', function(){
         writeColorChange($(this));
     });
     return rangeInputHTML;
+}
+function writeColorChange(thisRange) {
+    var newLessColorParameters = rangeValuesToLessParameters(thisRange);
+    //Writting the range values (converted to color functions) in the hidden input field that will be processed by PHP
+    var siblingHiddenInput = thisRange.siblings(".color-mod");
+    siblingHiddenInput.val(newLessColorParameters);
+    //changing val() doesn't trigger change. Got to do this manually
+    siblingHiddenInput.trigger('change');
+}
+function rangeValuesToLessParameters(thisRange) {
+    var dominant = $(".dominant")
+    var dominantHSLArray = backgroundRGBToHSLArray(dominant);
+    var colorHSLArray = rangeValuesToHSLArray(thisRange);
+    var colorToDominantHSLArray = colorDominantHSLDifference(colorHSLArray, dominantHSLArray);
+    var colorParameters = "lighten(saturate(spin("+dominant.css('background-color');
+    for(var key in colorToDominantHSLArray) {
+        var value = colorToDominantHSLArray[key].toFixed(0);
+        if(value < 0 && key == 1) {
+            colorParameters = colorParameters.replace('saturate','desaturate');
+            value = Math.abs(value);
+        } else if(value < 0 && key == 2) {
+            colorParameters = colorParameters.replace('lighten','darken');
+            value = Math.abs(value);
+        }
+        if(key != 0) {
+            value = value+'%';
+        }
+        colorParameters += ","+value+")";
+    }
+    return colorParameters;
+}
+function rangeValuesToHSLArray(thisRange) {
+    var HSL = new Array(3);
+    thisRange.siblings('.color-change').andSelf().each(function(index){
+        HSL[index] = $(this).val();
+    });
+    return HSL;
+}
+function colorDominantHSLDifference(color, dominant){
+    var dominantArray = new Array();
+    for(key in dominant) {
+        dominantArray.push(dominant[key]);
+    }
+    return dominantArray.map(function(value, index){
+        return color[index] - value;
+    });
+}
+function backgroundRGBToHSLArray(color){
+    var colorRGB = color.css("background-color");
+    var RGBArray = colorRGB.replace(/^rgb\(/,'').replace(/\)$/,'').split(',');
+    var RGB = new RGBColour(RGBArray[0], RGBArray[1], RGBArray[2]);
+
+    var HSL =  RGB.getHSL();
+    delete HSL["a"];
+    return HSL
 }
 
 
 //snippets
 $('q').hover(function(){
-    currentContent= $(this).html();
-    $(this).html(currentContent+' <a href="'+$(this).attr('cite')+'" target="_blank"><img src="images/external.png" /></a>');
+    var currentContent= $(this).html();
+    $(this).html(currentContent+' <a href="'+$(this).attr('cite')+'" target="_blank"><img src="/images/external.png" /></a>');
 },
 function(){
    $(this).html(currentContent);
 });
+
+// Method to delete LESS localStorage and refresh @import
+function destroyLessCache(pathToCss) { // e.g. '/css/' or '/stylesheets/'
+    if (!window.localStorage || !less ) {
+        console.debug("cache NOT cleared : Either there's no localstorage or less is undefined");
+        return;
+    }
+    var host = window.location.host;
+    var protocol = window.location.protocol;
+    var keyPrefix = protocol + '//' + host + pathToCss;
+    for (var key in window.localStorage) {
+        if (key.indexOf(keyPrefix) === 0) {
+            delete window.localStorage[key];
+        }
+    }
+    console.debug('cache cleared');
+}

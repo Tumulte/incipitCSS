@@ -60,6 +60,8 @@
      @bg-sat : @sat - 37%;
  }
 
+@custom: 'custom';
+
 .color-scheme(@type @dominant){
  @dominant-neg: spin(desaturate(lighten(@dominant, 50%), 10%), 20%);
  @hue: hue(@dominant);
@@ -113,4 +115,5 @@
  @grey-dom: desaturate(@dominant, 100%);
  @grey-cont: desaturate(@@bg, 100%);
 }
+
 

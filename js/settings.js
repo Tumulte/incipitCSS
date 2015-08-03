@@ -75,7 +75,9 @@ function colorEditionInputs(element) {
         rangeInputHTML += '<input type="range" value="' + colorHSLArray[parameter] + '" class="color-change" max="'+max+'"/>';
     }
 
-    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="color-mod less-var-change" name="@'+colorLessVariableName+'" />';
+    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="custom-var-name less-var-change" value="\'@{custom}-'+colorLessVariableName+'\'" name="@'+colorLessVariableName+'" />';
+    rangeInputHTML += '<input type="text" id="custom-'+colorLessVariableName+'" class="color-mod less-var-change" name="@custom-'+colorLessVariableName+'" />';
+    //TODO Check that it triggers less variable only on stop !
     $('.color-change').on('mouseup', function(){
         writeColorChange($(this));
     });
@@ -88,6 +90,7 @@ function writeColorChange(thisRange) {
     siblingHiddenInput.val(newLessColorParameters);
     //changing val() doesn't trigger change. Got to do this manually
     siblingHiddenInput.trigger('change');
+    thisRange.siblings('.custom-var-name').trigger('change');
 }
 function rangeValuesToLessParameters(thisRange) {
     var dominant = $(".dominant")

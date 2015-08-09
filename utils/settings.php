@@ -28,33 +28,33 @@ $fontLocation = "../fonts/";
         return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
     }
 </script>
-<form class="container" >
+<form id="settings-form" class="container" method="post" action="/update_config.php" >
   <label>Font size (px)
-  <input class="less-var-change" id="font-main-size" name="@font-main-size" data-suffix="px" type="number" step="1"/>
+  <input class="less-var-change" id="font-main-size" name="font-main-size" data-suffix="px" type="number" step="1"/>
   </label>
   <label>Base unit (line height, margins....)(rem)
-  <input id="base-unit" class="less-var-change" name="@base-unit"  data-suffix="rem" type="number" step="0.1"/>
+  <input id="base-unit" class="less-var-change" name="base-unit"  data-suffix="rem" type="number" step="0.1"/>
   </label>
   <label>Main font
-  <select id="font-main-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
+  <select id="font-main-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="font-main-url">
     <?php echo $fontList; ?>
   </select>
   </label>
   <label>Alternative font
-  <select id="font-alt-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
+  <select id="font-alt-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="font-main-url">
     <?php echo $fontList; ?>
   </select></label>
   <label>Third font
-  <select id="font-third-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="@font-main-url">
+  <select id="font-third-url" data-prefix="'<?php echo $fontLocation; ?>" data-suffix="'" class="less-var-change" name="font-main-url">
     <?php echo $fontList; ?>
   </select>
   </label>
   <p>
   <label>Main color
-  <input id="dominant" type="color" class="less-var-change" name="@dominant" />
+  <input id="dominant" type="color" class="less-var-change" name="dominant" />
   </label>
   <label>Color scheme type
-  <select id="color-type" class="less-var-change" name="@color-type">
+  <select id="color-type" class="less-var-change" name="color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>

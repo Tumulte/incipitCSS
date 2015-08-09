@@ -17,7 +17,6 @@ function changeLessSetings()
     return function(thisInput){
                                   if(thisInput) {
                                       lessVariables[thisInput.attr('id')] = inputToLessVariableConverter(thisInput);
-                                      console.debug(lessVariables);
                                       less.modifyVars(lessVariables);
                                   } else {
                                       return lessVariables;
@@ -47,6 +46,29 @@ var incipitCSS = function() {
                         $("#settings-container").on('click', '#customize-colors', function(){
                             toggleCustomColors();
                         })
+                        //TODO : fix success and failure message
+                        $("#save-settings").click(function(e)
+                        {
+                            e.preventDefault(); //STOP default action
+                            var postData = $(this).parents("#settings-form").serialize();
+                            var formURL = $(this).parents("#settings-form").attr("action");
+                            $.ajax(
+                                {
+                                    url : formURL,
+                                    type: "POST",
+                                    data : postData,
+                                    success:function(data, textStatus, jqXHR)
+                                    {
+                                        console.debug(jqXHR);
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown)
+                                    {
+                                        console.debug('not cool');
+                                    }
+                                });
+                            return false;
+                        });
+
                     }
                 });
             });
@@ -72,10 +94,10 @@ function colorEditionInputs(element) {
         }else{
             var max = 100;
         }
-        rangeInputHTML += '<input type="range" value="' + colorHSLArray[parameter] + '" class="color-change" max="'+max+'"/>';
+        rangeInputHTML += '<input type="range" value="' + colorHSLArray[parameter].toFixed(0) + '" class="color-change" max="'+max+'"/>';
     }
 
-    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="custom-var-name less-var-change" value="\'@{custom}-'+colorLessVariableName+'\'" name="@'+colorLessVariableName+'" />';
+    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="custom-var-name less-var-change" disabled="disabled" value="\'@{custom}-'+colorLessVariableName+'\'" name="@'+colorLessVariableName+'" />';
     rangeInputHTML += '<input type="text" id="custom-'+colorLessVariableName+'" class="color-mod less-var-change" name="@custom-'+colorLessVariableName+'" />';
     //TODO Check that it triggers less variable only on stop !
     $('.color-change').on('mouseup', function(){
@@ -86,10 +108,11 @@ function colorEditionInputs(element) {
 function writeColorChange(thisRange) {
     var newLessColorParameters = rangeValuesToLessParameters(thisRange);
     //Writting the range values (converted to color functions) in the hidden input field that will be processed by PHP
-    var siblingHiddenInput = thisRange.siblings(".color-mod");
-    siblingHiddenInput.val(newLessColorParameters);
+    thisRange.siblings(".custom-var-name").prop("disabled", false);
+    var lessColorModInput = thisRange.siblings(".color-mod");
+    lessColorModInput.val(newLessColorParameters);
     //changing val() doesn't trigger change. Got to do this manually
-    siblingHiddenInput.trigger('change');
+    lessColorModInput.trigger('change');
     thisRange.siblings('.custom-var-name').trigger('change');
 }
 function rangeValuesToLessParameters(thisRange) {

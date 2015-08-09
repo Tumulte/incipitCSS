@@ -1,7 +1,11 @@
+@import "normalize.less";
+@import "lesshat.less";
+@import "colors.less";
+
 /*FONTS SIZE*/
-@font-main-size: 16px; /* 20px in most browsers*/
+@font-main-size: 17;
 /*Line Height used as base unit*/
-@base-unit: 1.6rem; /* It's close to the goden ration. Moreover 1.6*20 = 32, which divides most screen size */
+@base-unit: 1.5;
 
 /*FIXED COLORS*/
 @color-warning: #fe0a07;
@@ -14,9 +18,8 @@
 
 /*Color scheme and main color*/
 @color-type: ana;
-@dominant: lighten(#0FAED2, 3%);
+@dominant: #0faed2;
 
-@font-main-url: "../fonts/DejaVuSans-ExtraLight.ttf";
 @font-alt-url:"../fonts/DejaVuSansCondensed.ttf";
 @font-third-url: "../fonts/DejaVuSansCondensed-Oblique.ttf";
 
@@ -51,7 +54,5 @@
 @font-third: third-font, @sans-fail;
 
 
-
-@import "normalize.less";
-@import "lesshat.less";
-@import "colors.less";
+@subdom:  '@{custom}-subdom';
+@custom-subdom:  lighten(saturate(spin(rgb(15, 174, 210),-86),0%),20%); //custom;

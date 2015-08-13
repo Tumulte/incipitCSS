@@ -1,9 +1,7 @@
 {
   "src_files": [
-    "lib/jquery.js",
-    "settings.js",
-    "Colour.js",
-    "contrast.js",
+    "lib/*.js",
+    "*.js",
     "test/*.js"
   ]
 }

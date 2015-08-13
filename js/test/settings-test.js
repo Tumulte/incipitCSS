@@ -49,3 +49,9 @@ describe("Contrast generator application", function() {
     });
 
 });
+describe('Live settings side pannel methods', function () {
+    it('should return the less variable with prfix and suffix taken from the data- attr', function (done) {
+        
+    });
+    
+});

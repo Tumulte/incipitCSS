@@ -1,4 +1,4 @@
-function inputToLessVariableConverter(thisInput) {
+function inputPrefixSuffixConcatenater(thisInput) {
     var value = undefinedToEmptyStr(thisInput.attr('data-prefix'));
     value += undefinedToEmptyStr(thisInput.val());
     value += undefinedToEmptyStr(thisInput.attr('data-suffix'));
@@ -16,7 +16,7 @@ function changeLessSetings()
     var lessVariables = {};
     return function(thisInput){
                                   if(thisInput) {
-                                      lessVariables[thisInput.attr('id')] = inputToLessVariableConverter(thisInput);
+                                      lessVariables[thisInput.attr('id')] = inputPrefixSuffixConcatenater(thisInput);
                                       less.modifyVars(lessVariables);
                                   } else {
                                       return lessVariables;
@@ -50,7 +50,7 @@ var incipitCSS = function() {
                         $("#save-settings").click(function(e)
                         {
                             e.preventDefault(); //STOP default action
-                            var postData = $(this).parents("#settings-form").serialize();
+                            var postData = settings();
                             var formURL = $(this).parents("#settings-form").attr("action");
                             $.ajax(
                                 {
@@ -59,11 +59,11 @@ var incipitCSS = function() {
                                     data : postData,
                                     success:function(data, textStatus, jqXHR)
                                     {
-                                        console.debug(jqXHR);
+                                        //TODO add clear cache button
+                                        localStorage.clear();
                                     },
                                     error: function(jqXHR, textStatus, errorThrown)
                                     {
-                                        console.debug('not cool');
                                     }
                                 });
                             return false;
@@ -73,9 +73,9 @@ var incipitCSS = function() {
                 });
             });
         }
-    }
+    };
 }();
-function toggleCustomColors(colorType) {
+function toggleCustomColors() {
     if($(".color-custom-settings").length > 0) {
         $('.color-custom-settings').remove();
     } else {
@@ -89,53 +89,52 @@ function colorEditionInputs(element) {
     var colorLessVariableName = element.children('.color-title').html();
     var rangeInputHTML = '';
     for(var parameter in colorHSLArray) {
+        var max = 100;
         if(parameter === 'h') {
-            var max = 360;
-        }else{
-            var max = 100;
+             max = 360;
         }
-        rangeInputHTML += '<input type="range" value="' + colorHSLArray[parameter].toFixed(0) + '" class="color-change" max="'+max+'"/>';
+        rangeInputHTML +='<label>'+parameter+' <input type="range" value="' + colorHSLArray[parameter].toFixed(0) + '" class="color-change" max="'+max+'"/></label>';
     }
 
-    rangeInputHTML += '<input type="text" id="'+colorLessVariableName+'" class="custom-var-name less-var-change" disabled="disabled" value="\'@{custom}-'+colorLessVariableName+'\'" name="@'+colorLessVariableName+'" />';
-    rangeInputHTML += '<input type="text" id="custom-'+colorLessVariableName+'" class="color-mod less-var-change" name="@custom-'+colorLessVariableName+'" />';
+    rangeInputHTML += '<input type="hidden" id="'+colorLessVariableName+'" class="custom-var-name less-var-change" disabled="disabled" value="\'@{custom}-'+colorLessVariableName+'\'" name="@'+colorLessVariableName+'" />';
+    rangeInputHTML += '<input type="hidden" id="custom-'+colorLessVariableName+'" class="color-mod less-var-change" name="@custom-'+colorLessVariableName+'" />';
     //TODO Check that it triggers less variable only on stop !
     $('.color-change').on('mouseup', function(){
-        writeColorChange($(this));
+        writeColorOperationInInput($(this));
     });
     return rangeInputHTML;
 }
-function writeColorChange(thisRange) {
-    var newLessColorParameters = rangeValuesToLessParameters(thisRange);
-    //Writting the range values (converted to color functions) in the hidden input field that will be processed by PHP
+
+function writeColorOperationInInput(thisRange) {
+    var lessColorOperationString = HSLRangeToLessColorOperationString(thisRange);
     thisRange.siblings(".custom-var-name").prop("disabled", false);
-    var lessColorModInput = thisRange.siblings(".color-mod");
-    lessColorModInput.val(newLessColorParameters);
+    var colorOperationInput = thisRange.siblings(".color-mod");
+    colorOperationInput.val(lessColorOperationString);
     //changing val() doesn't trigger change. Got to do this manually
-    lessColorModInput.trigger('change');
+    colorOperationInput.trigger('change');
     thisRange.siblings('.custom-var-name').trigger('change');
 }
-function rangeValuesToLessParameters(thisRange) {
-    var dominant = $(".dominant")
+function HSLRangeToLessColorOperationString(thisRange) {
+    var dominant = $(".dominant");
     var dominantHSLArray = backgroundRGBToHSLArray(dominant);
-    var colorHSLArray = rangeValuesToHSLArray(thisRange);
-    var colorToDominantHSLArray = colorDominantHSLDifference(colorHSLArray, dominantHSLArray);
-    var colorParameters = "lighten(saturate(spin("+dominant.css('background-color');
-    for(var key in colorToDominantHSLArray) {
-        var value = colorToDominantHSLArray[key].toFixed(0);
-        if(value < 0 && key == 1) {
-            colorParameters = colorParameters.replace('saturate','desaturate');
+    var rangeColorHSL = rangeValuesToHSLArray(thisRange);
+    var HSLDiffArray = HSLDiff(rangeColorHSL, dominantHSLArray);
+    var colorOperationString = "lighten(saturate(spin("+dominant.css('background-color');
+    for(var key in HSLDiffArray) {
+        var value = HSLDiffArray[key].toFixed(0);
+        if(value <= 0 && key == 1) {
+            colorOperationString = colorOperationString.replace('saturate','desaturate');
             value = Math.abs(value);
-        } else if(value < 0 && key == 2) {
-            colorParameters = colorParameters.replace('lighten','darken');
+        } else if(value <= 0 && key == 2) {
+            colorOperationString = colorOperationString.replace('lighten','darken');
             value = Math.abs(value);
         }
         if(key != 0) {
             value = value+'%';
         }
-        colorParameters += ","+value+")";
+        colorOperationString += ","+value+")";
     }
-    return colorParameters;
+    return colorOperationString;
 }
 function rangeValuesToHSLArray(thisRange) {
     var HSL = new Array(3);
@@ -144,7 +143,7 @@ function rangeValuesToHSLArray(thisRange) {
     });
     return HSL;
 }
-function colorDominantHSLDifference(color, dominant){
+function HSLDiff(color, dominant){
     var dominantArray = new Array();
     for(key in dominant) {
         dominantArray.push(dominant[key]);
@@ -153,39 +152,12 @@ function colorDominantHSLDifference(color, dominant){
         return color[index] - value;
     });
 }
-function backgroundRGBToHSLArray(color){
-    var colorRGB = color.css("background-color");
+function backgroundRGBToHSLArray(element){
+    var colorRGB = element.css("background-color");
     var RGBArray = colorRGB.replace(/^rgb\(/,'').replace(/\)$/,'').split(',');
     var RGB = new RGBColour(RGBArray[0], RGBArray[1], RGBArray[2]);
 
     var HSL =  RGB.getHSL();
     delete HSL["a"];
-    return HSL
-}
-
-
-//snippets
-$('q').hover(function(){
-    var currentContent= $(this).html();
-    $(this).html(currentContent+' <a href="'+$(this).attr('cite')+'" target="_blank"><img src="/images/external.png" /></a>');
-},
-function(){
-   $(this).html(currentContent);
-});
-
-// Method to delete LESS localStorage and refresh @import
-function destroyLessCache(pathToCss) { // e.g. '/css/' or '/stylesheets/'
-    if (!window.localStorage || !less ) {
-        console.debug("cache NOT cleared : Either there's no localstorage or less is undefined");
-        return;
-    }
-    var host = window.location.host;
-    var protocol = window.location.protocol;
-    var keyPrefix = protocol + '//' + host + pathToCss;
-    for (var key in window.localStorage) {
-        if (key.indexOf(keyPrefix) === 0) {
-            delete window.localStorage[key];
-        }
-    }
-    console.debug('cache cleared');
+    return HSL;
 }

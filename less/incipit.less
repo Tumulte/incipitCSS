@@ -1,11 +1,61 @@
 /* MAIN CONFIG */
 @import "config.less";
-@import "config-custom.less";
 @import "settings.less";
 
 /* ELEMENTS STYLES */
-@import "elements/buttons/plain-square.less";
-@import "elements/forms/full-width.less";
+@elements-buttons: "elements/buttons/plain-square.less";
+@elements-forms: "elements/buttons/plain-square.less";
+@import url(@elements-buttons);
+@import url(@elements-forms);
+.color-sample {
+  width: 100%;
+  min-height: 40px;
+  padding: @base-unit;
+}
+.color-test-inner{
+  width: 32px;
+  height: 32px;
+  margin: auto auto;
+}
+.dominant{
+  background: @dominant;
+}
+.subdom{
+  background: @@subdom;
+}
+.bg{
+  background: @@bg;
+}
+.subdom2{
+  background: @@subdom2;
+}
+.tonic{
+  background: @@tonic;
+}
+.tonic2{
+  background: @@tonic2;
+}
+.tonic3{
+  background: @@tonic3;
+}
+.color-main{
+  background: @dominant;
+}
+.color-neg{
+  background: @dominant-neg;
+}
+.color-test:hover .color-title{
+  display: inline;
+  color: @dominant;
+  background: @dominant-neg;
+}
+.color-title{
+  display:none;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -1.6em;
+  z-index: 10000;
+}
 
 /*main color scheme*/
 /*colors tests... You can remove it*/
@@ -18,7 +68,6 @@ html {
 *, *:before, *:after {
     .box-sizing(inherit);
 }
-
 
 .color-scheme(@color-type, @dominant);
 /*End of colors*/

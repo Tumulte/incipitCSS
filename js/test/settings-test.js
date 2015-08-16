@@ -1,8 +1,8 @@
 describe("Application", function() {
   it("creates a global variable for the name space", function () {
     expect(incipitCSS).toBeDefined();
-  })
-})
+  });
+});
 describe("Contrast generator application", function() {
     it("returns the luminosity contrast of two colour objects", function(){
         generated_c = new RGBColour(200, 99, 100);
@@ -50,8 +50,61 @@ describe("Contrast generator application", function() {
 
 });
 describe('Live settings side pannel methods', function () {
-    it('should return the less variable with prfix and suffix taken from the data- attr', function (done) {
-        
+    it('should return the less variable with prfix and suffix taken from the data- attr', function () {
+        var input = $("<input data-prefix='incipit' value='CSS' data-suffix=' rules'> ");
+        expect(inputPrefixSuffixConcatenater(input)).toEqual("incipitCSS rules");
     });
-    
+    it('should transform undefined into empty string', function () {
+        var input = $("<input> ");
+        expect(undefinedToEmptyStr(input.val())).toEqual("");
+    });
+    it('should return an array of variables', function () {
+        var input = $("<input id='foo' data-prefix='incipit' value='CSS' data-suffix=' rules'> ");
+        var input2 = $("<input id='fooBar' data-prefix='to' value=' make' data-suffix=' beautiful stuffs'> ");
+        var settings = changeLessSetings();
+        settings(input);
+        var settingsArray = settings(input2);
+        expect(settings()).toEqual({"foo": "incipitCSS rules", "fooBar": "to make beautiful stuffs"});
+
+    });
+    it('should change RGB background into HSL array', function(){
+        this.element = $('<div id="test-color" style="background-color:#00ff00"></div>');
+        this.element.appendTo('body');
+        var HSLArray = backgroundRGBToHSLArray($('#test-color'));
+        expect(HSLArray).toEqual({ h : 120, s : 100, l : 50 });
+
+    })
+});
+describe('custom colors methods', function () {
+    beforeEach(function() {
+        this.element = $('<div class="color-sample" style="background-color:#11aa11"></div>');
+        this.element.append('<div class="color-title">foo</div>');
+        this.element.appendTo('body');
+        toggleCustomColors();
+    }
+    );
+    afterEach(function() {
+            this.element.remove();
+        }
+    );
+    it('should toggle color range inputs to .color-sample elements', function() {
+        var HSLArray = backgroundRGBToHSLArray($('.color-sample'));
+        expect($(".color-change").length).toEqual(3);
+        expect($(".color-change").first().val()).toEqual(HSLArray.h.toFixed());
+        expect($("#foo").length).toEqual(1);
+        expect($("#foo").attr('name')).toEqual('@foo');
+        toggleCustomColors();
+        expect($(".color-change").length).toEqual(0);
+    });
+    it('should convert range values to LESS color operation string', function() {
+        this.element.append('<div class="dominant" style="background-color:#ffaaff" ></div>');
+        lessOperation = HSLRangeToLessColorOperationString($('.color-change'))
+        expect(lessOperation).toEqual('darken(desaturate(spin(rgb(255, 170, 255),-180),18%),46%)');
+        $('.dominant').css('background', '#11aa11');
+        lessOperation = HSLRangeToLessColorOperationString($('.color-change'))
+        expect(lessOperation).toEqual('darken(desaturate(spin(rgb(17, 170, 17),0),0%),0%)');
+        $('.dominant').css('background', '#223322');
+        lessOperation = HSLRangeToLessColorOperationString($('.color-change'))
+        expect(lessOperation).toEqual('lighten(saturate(spin(rgb(34, 51, 34),0),62%),20%)');
+    });
 });

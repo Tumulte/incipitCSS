@@ -18,6 +18,7 @@ $fontLocation = "../fonts/";
         $('#font-main-size').attr('value', fontMainSize);
         $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
         $('#dominant').attr('value', dominantColor);
+        $('#dominant').attr('value', dominantColor);
     });
     function rgbToHex(rgb) {
         rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
@@ -54,7 +55,7 @@ $fontLocation = "../fonts/";
   <input id="dominant" type="color" class="less-var-change" name="dominant" />
   </label>
   <label>Color scheme type
-  <select id="color-type" class="less-var-change" name="color-type">
+  <select id="color-type" data-prefix="'" data-suffix="'" class="less-var-change" name="color-type">
     <option value="op">Oposite colors</option>
     <option value="ana">Analogous colors</option>
     <option value="light">Light variations</option>
@@ -87,6 +88,6 @@ $fontLocation = "../fonts/";
     </div>
   </div>
   <br/>
-    <button type="submit" id="save-settings">Save</button>
+    <button type="button" id="save-settings">Save</button>
     <button type="button" id="close-settings">Close</button>
 </form>

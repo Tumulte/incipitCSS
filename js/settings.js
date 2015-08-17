@@ -45,7 +45,7 @@ var incipitCSS = function() {
                         });
                         $("#settings-container").on('click', '#customize-colors', function(){
                             toggleCustomColors();
-                        })
+                        });
                         //TODO : fix success and failure message
                         $("#save-settings").click(function(e)
                         {
@@ -129,7 +129,7 @@ function HSLRangeToLessColorOperationString(thisRange) {
             colorOperationString = colorOperationString.replace('lighten','darken');
             value = Math.abs(value);
         }
-        if(key != 0) {
+        if(key !== 0) {
             value = value+'%';
         }
         colorOperationString += ","+value+")";
@@ -144,7 +144,7 @@ function rangeValuesToHSLArray(thisRange) {
     return HSL;
 }
 function HSLDiff(color, dominant){
-    var dominantArray = new Array();
+    var dominantArray = [];
     for(key in dominant) {
         dominantArray.push(dominant[key]);
     }
@@ -158,6 +158,6 @@ function backgroundRGBToHSLArray(element){
     var RGB = new RGBColour(RGBArray[0], RGBArray[1], RGBArray[2]);
 
     var HSL =  RGB.getHSL();
-    delete HSL["a"];
+    delete HSL.a;
     return HSL;
 }

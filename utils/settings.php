@@ -1,14 +1,29 @@
 <?php
-$handle = opendir('../fonts') or die ("Can't find of read font folder");
-$fontList = '';
-while (false !== ($entry = readdir($handle))) {
-    if ($entry == '.' or $entry == '..') {
-        continue;
-    } else {
-        $fontList .= '"<option value="'.$entry.'">'.$entry.'</option>';
+function fileListToHTMLOption($handle)
+{
+    $list = '';
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry == '.' or $entry == '..') {
+            continue;
+        } else {
+            $list .= '"<option value="'.$entry.'">'.$entry.'</option>';
+        }
     }
+    return $list;
 }
 $fontLocation = "../fonts/";
+$fontFolder = opendir($fontLocation) or die("Can't find or read font folder");
+$fontList = fileListToHTMLOption($fontFolder);
+$elementsFolder = scandir('../less/elements') or die("Can't find or read elements folder");
+$elementsInput = '';
+foreach ($element as $key => $value) {
+    $elementsInput = "<select>";
+    $elements = opendir('../less/elements/'.$element) or die("Can't find or read element folder");
+    fileListToHTMLOption($handle);
+
+    $elementsInput = "</select>";
+}
+
 ?>
 <script type="text/javascript">
     $(function(){

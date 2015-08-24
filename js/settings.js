@@ -17,6 +17,7 @@ function changeLessSetings()
     return function(thisInput){
                                   if(thisInput) {
                                       lessVariables[thisInput.attr('id')] = inputPrefixSuffixConcatenater(thisInput);
+                                      console.debug(lessVariables);
                                       less.modifyVars(lessVariables);
                                   } else {
                                       return lessVariables;
@@ -129,7 +130,7 @@ function HSLRangeToLessColorOperationString(thisRange) {
             colorOperationString = colorOperationString.replace('lighten','darken');
             value = Math.abs(value);
         }
-        if(key !== 0) {
+        if(key !== '0') {
             value = value+'%';
         }
         colorOperationString += ","+value+")";

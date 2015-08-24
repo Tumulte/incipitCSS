@@ -16,12 +16,16 @@ $fontFolder = opendir($fontLocation) or die("Can't find or read font folder");
 $fontList = fileListToHTMLOption($fontFolder);
 $elementsFolder = scandir('../less/elements') or die("Can't find or read elements folder");
 $elementsInput = '';
-foreach ($element as $key => $value) {
-    $elementsInput = "<select>";
-    $elements = opendir('../less/elements/'.$element) or die("Can't find or read element folder");
-    fileListToHTMLOption($handle);
+foreach ($elementsFolder as $element) {
+    if ($element == '.' or $element == '..') {
+        continue;
+    }
+    $elementsInput = '<label>'.$element.'<select data-prefix="\'elements/buttons/" data-suffix="\'" class="less-var-change" id="elements-'.$element.'" name="elements-'.$element.'">';
 
-    $elementsInput = "</select>";
+    $elements = opendir('../less/elements/'.$element) or die("Can't find or read element folder");
+    $elementsInput .= fileListToHTMLOption($elements);
+    $elementsInput .= "</select></label>";
+    echo $elementsInput;
 }
 
 ?>

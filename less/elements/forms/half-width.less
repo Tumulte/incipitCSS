@@ -58,7 +58,7 @@ input[type="tel"],
 input[type="color"] {
   height: 3.2em; /* this + border-box removes the 2px border offset*/
   display: block;
-  width: ~"calc(100% - @{base-unit})";
+  width: ~"calc(50% - @{base-unit})";
   padding: 0.95em 0.8em; 
   color: @grey-light;
   background-color: #fff;
@@ -79,7 +79,7 @@ input[type="color"] {
   transition: border linear 0.2s, box-shadow linear 0.2s, width ease-out 0.3s;
 }
 select{
-  width: 100%;
+  width: 50%;
 }
 
 select:focus:invalid,
@@ -135,7 +135,7 @@ input[type="color"]{
 }
 input[type="range"]{
   margin: @base-unit;
-  width: ~"calc(100% - @{base-unit})";
+  width: ~"calc(50% - @{base-unit})";
 }
 .screen-reader-text,/*Hidden for those who see but read by screen readers for those who don't*/
 .assistive-text {

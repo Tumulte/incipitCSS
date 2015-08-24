@@ -1,7 +1,7 @@
 <?php
 function fileListToHTMLOption($handle)
 {
-    $list = '';
+    $list = '<option value=none">Select</option>';
     while (false !== ($entry = readdir($handle))) {
         if ($entry == '.' or $entry == '..') {
             continue;
@@ -20,7 +20,7 @@ foreach ($elementsFolder as $element) {
     if ($element == '.' or $element == '..') {
         continue;
     }
-    $elementsInput = '<label>'.$element.'<select data-prefix="\'elements/buttons/" data-suffix="\'" class="less-var-change" id="elements-'.$element.'" name="elements-'.$element.'">';
+    $elementsInput = '<label>'.$element.'<select data-prefix="\'elements/'.$element.'/" data-suffix="\'" class="less-var-change" id="elements-'.$element.'" name="elements-'.$element.'">';
 
     $elements = opendir('../less/elements/'.$element) or die("Can't find or read element folder");
     $elementsInput .= fileListToHTMLOption($elements);

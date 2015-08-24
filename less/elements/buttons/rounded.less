@@ -1,6 +1,3 @@
-@import "../../config.less";
-@import "../../lesshat.less";
-
 button,
 .buttonified,
 input[type="submit"],
@@ -12,7 +9,7 @@ input[type="button"],{/*buttonified exists to make a link looks like a button, w
   line-height: 1.6em;
   font-weight: bold;
   padding:  @base-unit/2 @base-unit;
-  border-radius: 20px;
+  border-radius: 2*@base-unit;
   .drop-shadow(4px, 4px, 3px);
 }
 .buttonified{

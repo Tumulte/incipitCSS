@@ -1,7 +1,10 @@
 /* MAIN CONFIG */
 @import "config.less";
 @import "settings.less";
-
+//gotta start with :
+//less.modifyVars({'elements-buttons': "'elements/buttons/rounded.less'", 'elements-forms': "'elements/forms/full-width.less'"});
+@import url(@elements-buttons);
+@import url(@elements-forms);
 /* ELEMENTS STYLES */
 .color-sample {
   width: 100%;

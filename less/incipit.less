@@ -1,10 +1,12 @@
 /* MAIN CONFIG */
 @import "config.less";
 @import "settings.less";
-//gotta start with :
-//less.modifyVars({'elements-buttons': "'elements/buttons/rounded.less'", 'elements-forms': "'elements/forms/full-width.less'"});
-@import url(@elements-buttons);
-@import url(@elements-forms);
+
+@elements-buttons: 'elements/buttons/plain-square.less';
+@elements-forms: 'elements/forms/full-width.less';
+
+@import "@{elements-buttons}";
+@import "@{elements-forms}";
 /* ELEMENTS STYLES */
 .color-sample {
   width: 100%;
@@ -410,3 +412,4 @@ audio {
     left: 50%;
   }
 }
+@import "incipit-local.less";

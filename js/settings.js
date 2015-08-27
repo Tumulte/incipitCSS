@@ -39,16 +39,20 @@ var incipitCSS = function() {
                         });
                         var settings = changeLessSetings();
                         $('#settings-container').on('change','.less-var-change', function () {
+                            $("#save-validate, #save-off").html('Save');
+                            $("#save-validate, #save-off").attr('id', 'save-settings');
                             settings($(this));
                         });
-                        $(document).on('click', '#save-settings', function () {
-                            $.post('/update_config.php', {data: settings()});
+                        $('#settings-container').on('click', '#save-settings', function () {
+                            $(this).html('Are you sure ?');
+                            $(this).attr('id', 'save-validate');
                         });
                         $("#settings-container").on('click', '#customize-colors', function(){
+                            console.debug("ihbib");
                             toggleCustomColors();
                         });
                         //TODO : fix success and failure message
-                        $("#save-settings").click(function(e)
+                        $("#save-validate").click(function(e)
                         {
                             e.preventDefault(); //STOP default action
                             var postData = settings();
@@ -62,6 +66,7 @@ var incipitCSS = function() {
                                     {
                                         //TODO add clear cache button
                                         localStorage.clear();
+                                        $(this).attr('id', 'save-off');
                                     },
                                     error: function(jqXHR, textStatus, errorThrown)
                                     {

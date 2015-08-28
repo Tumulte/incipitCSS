@@ -28,15 +28,15 @@ function changeLessSetings()
 var incipitCSS = function() {
     return {
         settings: function () {
-            $("body") .append('<button id="settings">settings</button>'+
-                              '<div id="settings-container"></div>');
-            $('#settings').click(function () {
+            var body = document.getElementsByTagName('body')[0];
+            body.innerHTML += '<button id="settings">settings</button>'+
+                              '<div id="settings-container"></div>';
+            document.getElementById('settings').onclick = function () {
                 $.ajax({
                     url: '/utils/settings.php',  type: 'GET', success: function (data) {
-                        $('#settings-container').html(data);
-                        $('#close-settings').click(function () {
-                            $('#settings-container').html('');
-                        });
+                        var settingsContainer = document.getElementById('settings-container');
+                        settingsContainer.innerHTML = data;
+                        document.getElementById('close-settings').onclick = function(){settingsContainer.innerHTML = ''};
                         var settings = changeLessSetings();
                         $('#settings-container').on('change','.less-var-change', function () {
                             $("#save-validate, #save-off").html('Save');
@@ -52,7 +52,7 @@ var incipitCSS = function() {
                             toggleCustomColors();
                         });
                         //TODO : fix success and failure message
-                        $("#save-validate").click(function(e)
+                        $("#settings-container").on('click', "#save-validate", function(e)
                         {
                             e.preventDefault(); //STOP default action
                             var postData = settings();
@@ -64,6 +64,7 @@ var incipitCSS = function() {
                                     data : postData,
                                     success:function(data, textStatus, jqXHR)
                                     {
+                                        console.debug(data, textStatus, jqXHR);
                                         //TODO add clear cache button
                                         localStorage.clear();
                                         $(this).attr('id', 'save-off');
@@ -77,7 +78,7 @@ var incipitCSS = function() {
 
                     }
                 });
-            });
+            };
         }
     };
 }();

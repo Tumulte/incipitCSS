@@ -87,11 +87,11 @@
  @sat-tonic2: hsl(@hue, 20%, @light);
  @sat-tonic3: hsl(@hue, 10%, @light);
  /*Oposite */
- @op-bg: spin(hsl(@hue, @bg-sat, @bg-lightness),170%);
+ @op-bg: contrast(@dominant, spin(hsl(@hue, @sat, 5%), 180), spin(hsl(@hue, @sat, 95%), 180));
  @op-tonic: spin(@dominant, 170%);
  @hue-op: hue(@op-bg);
- @op-subdom: hsl(@hue, @sat, @light+@light-more);
- @op-subdom2: hsl(@hue, @sat, @light+@light-less);
+ @op-subdom: overlay(@op-tonic, @dominant);
+ @op-subdom2:average(@op-tonic, @dominant);
  @hue-op-tonic: hue(@op-tonic);
  @op-tonic2: spin(hsl(@hue-op-tonic, @sat, @light+@light-more), -20);
  @op-tonic3: spin(hsl(@hue-op-tonic, @sat, @light+@light-less), -15);

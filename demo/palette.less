@@ -1,0 +1,105 @@
+@original:  #f09099;
+#container {
+    width: 1000px;
+}
+.colour{
+    float:left;
+    width:100px;
+    height:100px;
+    background: @original
+}
+#colour2{
+    background: overlay(@original, #333);
+}
+#colour3{
+    background: overlay(overlay(@original, #111), #666);
+}
+#colour4{
+    background: overlay(@original, #ccc);
+}
+#colour5{
+    background: overlay(overlay(@original, #eee), #999);
+}
+@spin:  spin(@original, 180);
+#colour6{
+    background: @spin;
+}
+#colour7{
+    background: overlay(@spin, #333);
+}
+#colour8{
+    background: overlay(overlay(@spin, #111), #666);
+}
+#colour9{
+    background: overlay(@spin, #ccc);
+}
+#colour10{
+    background: overlay(overlay(@spin, #eee), #999);
+}
+@spin1:  spin(@original, 160);
+@spin2:  spin(@original, 200);
+#colour11{
+    background: @original;
+}
+#colour12{
+    background: @spin1;
+}
+#colour13{
+    background: overlay(@spin1, #333);
+}
+#colour14{
+    background: overlay(overlay(@spin1, #111), #666);
+}
+#colour14{
+    background: overlay(@spin1, #ccc);
+}
+#colour15{
+    background: overlay(overlay(@spin1, #eee), #999);
+}
+#colour16{
+    background: @spin2;
+}
+#colour17{
+    background: overlay(@spin2, #333);
+}
+#colour18{
+    background: overlay(overlay(@spin2, #111), #666);
+}
+#colour19{
+    background: overlay(@spin2, #ccc);
+}
+#colour20{
+    background: overlay(overlay(@spin2, #eee), #999);
+}
+@analog1:  spin(@original, 20);
+@analog2:  spin(@original, -20);
+#colour21{
+    background: @analog1;
+}
+#colour22{
+    background: overlay(@analog1, #333);
+}
+#colour23{
+    background: overlay(overlay(@analog1, #111), #666);
+}
+#colour24{
+    background: overlay(@analog1, #ccc);
+}
+#colour25{
+    background: overlay(overlay(@analog1, #eee), #999);
+}
+#colour26{
+    background: @analog2;
+}
+#colour27{
+    background: overlay(@analog2, #333);
+}
+#colour28{
+    background: overlay(overlay(@analog2, #111), #666);
+}
+#colour29{
+    background: overlay(@analog2, #ccc);
+}
+#colour30{
+    background: overlay(overlay(@analog2, #eee), #999);
+}

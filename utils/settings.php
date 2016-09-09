@@ -2,14 +2,24 @@
 function fileListToHTMLOption($handle)
 {
     $list = '<option value=none">Select</option>';
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry == '.' or $entry == '..') {
+    $fonts = array();
+    while ($fonts[] = readdir($handle));
+    sort($fonts);
+    closedir($handle);
+    foreach($fonts as $font) {
+        if ($font == '.' or $font == '..' or !$font) {
             continue;
         } else {
-            $list .= '"<option value="'.$entry.'">'.$entry.'</option>';
+            $list .= '"<option value="'.$font.'">'.$font.'</option>';
         }
     }
     return $list;
+}
+if ($handle = opendir($path)) {
+    $files = array();
+    while ($files[] = readdir($dir));
+    sort($files);
+    closedir($handle);
 }
 $fontLocation = "../fonts/";
 $fontFolder = opendir($fontLocation) or die("Can't find or read font folder");

@@ -1,7 +1,7 @@
 #!/bin/bash
 function copydata(){
   cp normalize.css/normalize.css ./less
-  cp lesshat/build/lesshat.less ./less
+  mv 3l less
   cp html5-test-page/test.html .
   sed -i '/<head>/r head.txt' test.html
   sed -i 's/class="page"/class="container"/' test.html
@@ -12,6 +12,9 @@ function copydata(){
 function update(){
   git submodule init
   git submodule update
+  npm install lesshat --save
+  mv node_modules/lesshat less/
+  rm -rf node_modules
   echo 'copying the useful files to the main directory'
   copydata
 }

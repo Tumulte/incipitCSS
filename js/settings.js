@@ -17,12 +17,19 @@ function changeLessSetings()
     return function(thisInput){
                                   if(thisInput) {
                                       lessVariables[thisInput.attr('id')] = inputPrefixSuffixConcatenater(thisInput);
-                                      console.debug(lessVariables);
                                       less.modifyVars(lessVariables);
                                   } else {
                                       return lessVariables;
                                   }
                               };
+}
+function rgbToHex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+function hex(x) {
+    var hexDigits = new Array ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
 }
 
 var incipitCSS = function() {
@@ -33,7 +40,8 @@ var incipitCSS = function() {
                               '<div id="settings-container"></div>';
             document.getElementById('settings').onclick = function () {
                 $.ajax({
-                    url: '/utils/settings.php',  type: 'GET', success: function (data) {
+                    url: incipitSettings.url+'utils/settings.php',  type: 'GET', success: function (data) {
+
                         var settingsContainer = document.getElementById('settings-container');
                         settingsContainer.innerHTML = data;
                         document.getElementById('close-settings').onclick = function(){settingsContainer.innerHTML = ''};
@@ -48,7 +56,6 @@ var incipitCSS = function() {
                             $(this).attr('id', 'save-validate');
                         });
                         $("#settings-container").on('click', '#customize-colors', function(){
-                            console.debug("ihbib");
                             toggleCustomColors();
                         });
                         //TODO : fix success and failure message
@@ -76,7 +83,18 @@ var incipitCSS = function() {
                             return false;
                         });
 
+                    },
+                    complete: function(){
+                        var baseUnit = parseInt($('html').css("line-height"));
+                        var fontMainSize = parseInt($('html').css("font-size"));
+                        var dominantColor = rgbToHex($('.dominant').css('background-color'));
+                        $('#font-main-size').attr('value', fontMainSize);
+                        $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
+                        $('#dominant').attr('value', dominantColor);
+                        $('#dominant').attr('value', dominantColor);
+                     
                     }
+                    
                 });
             };
         }

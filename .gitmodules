@@ -1,9 +1,9 @@
-[submodule "lesshat"]
-	path = lesshat
-	url = https://github.com/madebysource/lesshat.git
 [submodule "normalize.css"]
 	path = normalize.css
 	url = https://github.com/necolas/normalize.css.git
 [submodule "html5-test-page"]
 	path = html5-test-page
 	url = https://github.com/cbracco/html5-test-page
+[submodule "3l"]
+	path = 3l
+	url = git@github.com:mateuszkocz/3l.git

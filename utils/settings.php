@@ -29,25 +29,7 @@ foreach ($elementsFolder as $element) {
 }
 
 ?>
-<script type="text/javascript">
-    $(function(){
-        var baseUnit = parseInt($('html').css("line-height"));
-        var fontMainSize = parseInt($('html').css("font-size"));
-        var dominantColor = rgbToHex($('.dominant').css('background-color'));
-        $('#font-main-size').attr('value', fontMainSize);
-        $('#base-unit').attr('value', (baseUnit/fontMainSize).toFixed(1));
-        $('#dominant').attr('value', dominantColor);
-        $('#dominant').attr('value', dominantColor);
-    });
-    function rgbToHex(rgb) {
-        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-    }
-    function hex(x) {
-        var hexDigits = new Array ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
-        return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
-    }
-</script>
+
 <form id="settings-form" class="container" method="post" action="/update_config.php" >
   <label>Font size (px)
   <input class="less-var-change" id="font-main-size" name="font-main-size" data-suffix="px" type="number" step="1"/>
